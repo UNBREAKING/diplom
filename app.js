@@ -1,14 +1,14 @@
-var express = require('express')
+require('babel-register')({
+    presets: ['react', 'es2015']
+});
 
-var app = express()
+var express = require('express');
+var app = express();
 
-app.use(express.static(__dirname))
+app.use(express.static('public'));
+app.use(require('./routes/index.js'));
 
-app.get('*', function (req, res) {
-    res.render('index.html')
-})
-
-app.listen(3000, function () {
-    console.log('Example app listening on port 3000!');
-  });
-  
+var PORT = 3000;
+app.listen(PORT, function() {
+    console.log('http://localhost:' + PORT);
+});
