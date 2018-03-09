@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import { Link } from 'react-router-dom';
 
 const Header = () =>
     <Wrapper>
@@ -8,15 +9,15 @@ const Header = () =>
         </ProjectName>
         <ClickbleWrapper>
         <LinkWrapper>
-            <Link>
+            <LinkButton to='/'>
                 Home
-            </Link>
-            <Link>
+            </LinkButton>
+            <LinkButton to='/projects'>
                 Projects
-            </Link>
-            <Link>
+            </LinkButton>
+            <LinkButton to='/projects'>
                 Some Link
-            </Link>
+            </LinkButton>
         </LinkWrapper>
         <Button>
             Sign Up
@@ -37,7 +38,7 @@ const ProjectName = styled.span`
     font-size: 36px;
 `
 
-const Link = styled.span`
+const LinkButton = styled(Link)`
     color: white;
     border-left: 2px solid white;
     font-size: 24px;
