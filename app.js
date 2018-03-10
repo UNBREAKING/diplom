@@ -1,5 +1,13 @@
 require('babel-register')({
-    presets: ['react', 'es2015']
+    presets: ['react', 'es2015'],
+    plugins: [
+        [
+            "babel-plugin-styled-components",
+            {
+                "ssr": true
+            }
+        ]
+    ]
 });
 
 var express = require('express');

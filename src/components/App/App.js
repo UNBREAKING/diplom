@@ -3,8 +3,8 @@ import { Route, Switch } from 'react-router-dom'
 import Layout from './Layout.js'
 import { HomePage } from '../index'
 
-const App = () =>
-    <Layout>
+const App = ({ styles }) =>
+    <Layout styles ={ styles }>
         <Switch>
             <Route exact path='/' component={HomePage} />
             <Route path='/projects' component={()=><h1>asds</h1>} />

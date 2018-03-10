@@ -1,15 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import  { Header} from '../index'
+import styled from 'styled-components'
+import { Header } from '../index'
 
 class Layout extends React.Component {
     constructor() {
         super();
-        this._handleClick = this._handleClick.bind(this);
-    }
-    _handleClick() {
-        alert(this.props.custom.title);
     }
     render() {
         const { custom } = this.props
@@ -18,7 +15,7 @@ class Layout extends React.Component {
                 <head>
                     <title> InProject</title>
                 </head>
-                <body>
+                <Body>
                     <Header />
                     {this.props.children}
                     <ul>
@@ -32,12 +29,18 @@ class Layout extends React.Component {
                     <script dangerouslySetInnerHTML={{
                         __html: 'window.PROPS=' + JSON.stringify(custom)
                     }} />
-                    <script src='/index.js' />
-                </body>
+                    <script src='../bundle/index.js' />
+                </Body>
             </html>
         );
     }
 }
+
+const Body = styled.body`
+    margin: 0;
+    width: 100%;
+    height: 100%;
+`
 
 const wrapper = connect(
     (state) => {

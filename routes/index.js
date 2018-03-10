@@ -12,20 +12,21 @@ function reducer(state) { return state; }
 router.get('*', function(request, response) {
     var initialState = { title: 'Universal React' };
     var store = Redux.createStore(reducer, initialState);
-
-    const sheet = new ServerStyleSheet();
     
+    const sheet = new ServerStyleSheet();
+
     var context = {};
     var html = ReactDOMServer.renderToString(
         sheet.collectStyles(
             <Provider store={store}>
                 <StaticRouter location={request.url} context={context}>
-                    <App />
+                    <App/>
                 </StaticRouter>
             </Provider>
-        )
+            )
     );
     const styles = sheet.getStyleTags(); 
+    html = html.replace('</head>',`${styles}</head>`)
 
     if (context.status >= 400) {
         response.status(context.status).send(html);
