@@ -21,7 +21,6 @@ ContentBlock.propTypes = {
 export default ContentBlock
 
 const Wrapper = styled.div`
-    width: 100%;
     padding: 40px 40px;
     background: #FAFAFA;
     border-top: 1px solid #E0E0E0;
@@ -30,6 +29,7 @@ const Wrapper = styled.div`
 const TextContent = styled.div`
     color: #041A3A;
     font-size: 20px;
+    font-family: 'Roboto Regular';
     width: 30%;
     margin-left: ${props => props.right ? '65%' : '0'};
     text-align: left;

@@ -1,14 +1,19 @@
 import React from 'react'
 import { Route, Switch } from 'react-router-dom'
-import Layout from './Layout.js'
-import { HomePage } from '../index'
+import styled from 'styled-components'
+import { HomePage, Header } from '../index'
 
-const App = ({ styles }) =>
-    <Layout styles ={ styles }>
+const App = () =>
+    <Wrapper>
+        <Header />
         <Switch>
             <Route exact path='/' component={HomePage} />
-            <Route path='/projects' component={()=><h1>asds</h1>} />
+            <Route exact path='/projects' component={()=><h1>asds</h1>} />
         </Switch>
-    </Layout>
+    </Wrapper>
 
 export default App
+
+const Wrapper = styled.div`
+    width: 100%;
+`

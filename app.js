@@ -1,20 +1,14 @@
-require('babel-register')({
-    presets: ['react', 'es2015'],
-    plugins: [
-        [
-            "babel-plugin-styled-components",
-            {
-                "ssr": true
-            }
-        ]
-    ]
-});
-
+var path = require('path');
 var express = require('express');
 var app = express();
 
-app.use(express.static('public'));
-app.use(require('./routes/index.js'));
+app.use(express.static(__dirname))
+
+const landingPage = function (req, res) {
+    res.sendFile(path.join(__dirname + '/index.html'));
+}
+
+app.get('/*', landingPage)
 
 var PORT = 3000;
 app.listen(PORT, function() {
