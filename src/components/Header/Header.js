@@ -44,7 +44,7 @@ const LinkButton = styled(Link)`
     color: white;
     border-left: 2px solid white;
     font-size: 24px;
-    font-family: 'Roboto Regular';
+    font-family: 'Roboto Light';
     margin-left: 20px;
     padding-left: 10px;
     text-decoration:none;
@@ -68,7 +68,7 @@ const Button = styled.button`
     background: #000000;
     color: white;
     font-size: 20px;
-    font-family: 'Roboto Regular';
+    font-family: 'Roboto Light';
     padding: 10px 10px;
     border: 1px solid #A6A6A6;
     border-radius: 7px;

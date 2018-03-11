@@ -1,7 +1,7 @@
 import React from 'react'
 import { Route, Switch } from 'react-router-dom'
 import styled from 'styled-components'
-import { HomePage, Header } from '../index'
+import { HomePage, Header, Footer } from '../index'
 
 const App = () =>
     <Wrapper>
@@ -10,6 +10,7 @@ const App = () =>
             <Route exact path='/' component={HomePage} />
             <Route exact path='/projects' component={()=><h1>asds</h1>} />
         </Switch>
+        <Footer />
     </Wrapper>
 
 export default App

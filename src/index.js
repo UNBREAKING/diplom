@@ -12,8 +12,12 @@ ReactDOM.render(
 
 injectGlobal`
     @font-face {
-    font-family: 'Roboto Regular';
-    src: url('../fonts/Roboto-Regular.ttf');
+        font-family: 'Roboto Regular';
+        src: url('../fonts/Roboto-Regular.ttf');
+    }
+    @font-face {
+        font-family: 'Roboto Light';
+        src: url('../fonts/Roboto-Light.ttf')
     }
 
     body {
