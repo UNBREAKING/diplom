@@ -29,8 +29,11 @@ export default Header
 
 const Wrapper = styled.div`
     background: #003F61;
-    padding: 10px 20px;
+    padding: 10px 0;
     vertical-align: middle;
+    width: 100%;
+    box-shadow: 0 0 10px black;
+    position: fixed;
 `
 
 const ProjectName = styled.span`
@@ -38,6 +41,7 @@ const ProjectName = styled.span`
     font-size: 36px;
     font-family: 'Roboto Regular';
     font-weight: 700;
+    padding-left: 20px;
 `
 
 const LinkButton = styled(Link)`
@@ -62,6 +66,7 @@ const LinkWrapper = styled.span`
 
 const ClickbleWrapper = styled.div`
     float: right;
+    padding-right: 20px;
 `
 
 const Button = styled.button`

@@ -22,7 +22,7 @@ export default ContentBlock
 
 const Wrapper = styled.div`
     padding: 40px 40px;
-    background: #FAFAFA;
+    background: white;
     border-top: 1px solid #E0E0E0;
 `
 
