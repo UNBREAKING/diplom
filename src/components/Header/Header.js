@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom';
+import { Login } from '../index'
 
 const Header = () =>
     <Wrapper>
@@ -19,9 +20,7 @@ const Header = () =>
                 Some Link
             </LinkButton>
         </LinkWrapper>
-        <Button>
-            Sign Up
-        </Button>
+        <Login />
         </ClickbleWrapper>
     </Wrapper>
 
@@ -67,18 +66,4 @@ const LinkWrapper = styled.span`
 const ClickbleWrapper = styled.div`
     float: right;
     padding-right: 20px;
-`
-
-const Button = styled.button`
-    background: #000000;
-    color: white;
-    font-size: 20px;
-    font-family: 'Roboto Light';
-    padding: 10px 10px;
-    border: 1px solid #A6A6A6;
-    border-radius: 7px;
-    cursor: pointer;
-    :hover {
-        background: #041A3A;
-    }
 `

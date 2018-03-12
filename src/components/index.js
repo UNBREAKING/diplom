@@ -13,3 +13,5 @@ export { ProjectsPage } from './ProjectsPage'
 export { AddProjectBlock } from './AddProjectBlock'
 
 export { ProjectsBlock } from './ProjectsBlock'
+
+export { default as Login } from './Login'
