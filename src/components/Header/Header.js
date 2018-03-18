@@ -16,8 +16,8 @@ const Header = () =>
             <LinkButton to='/projects'>
                 Projects
             </LinkButton>
-            <LinkButton to='/projects'>
-                Some Link
+            <LinkButton to='/offers'>
+                Offers
             </LinkButton>
         </LinkWrapper>
         <Login />

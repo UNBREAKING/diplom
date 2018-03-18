@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { openSignInModal } from './actions'
+import { openSignInModal, closeSignInModal } from './actions'
 import Login from './Login'
 
 const mapStateToProps = ({
@@ -10,4 +10,4 @@ const mapStateToProps = ({
     visibleModal
 })
 
-export default connect(mapStateToProps, { openSignInModal })(Login)
+export default connect(mapStateToProps, { openSignInModal, closeSignInModal })(Login)
