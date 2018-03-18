@@ -4,7 +4,7 @@ import styled from 'styled-components'
 const ProjectsBlock = () =>
     <Wrapper>
         <Title>
-            Projects
+            PROJECTS
         </Title>
     </Wrapper>
 
@@ -23,6 +23,7 @@ const Title = styled.div`
     font-size: 30px;
     font-weight: 400;
     color: #003F61;
+    text-align: center;
     font-family: 'Roboto Regular';
-    border-bottom: 1px solid #003F61;
+    border-bottom: 1px solid #969696;
 `

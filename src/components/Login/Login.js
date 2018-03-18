@@ -1,22 +1,18 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import styled from 'styled-components'
+import PropTypes from 'prop-types'
+import { WhiteButton, ModalWindow } from '../common'
 
-const Login = ({ openSignInModal }) =>
-  <Button onClick={ () => openSignInModal() }>
-    Sign Up
-  </Button>
+const Login = ({ openSignInModal, visibleModal }) =>
+  <Fragment>
+    <WhiteButton 
+      onClick={ () => openSignInModal() }
+      text="Sign Up" />
+    { visibleModal && <ModalWindow />}
+  </Fragment>
 
-const Button = styled.button`
-background: white;
-color: #003F61;
-font-size: 20px;
-font-family: 'Roboto Light';
-padding: 10px 30px;
-border: 1px solid #A6A6A6;
-border-radius: 2px;
-cursor: pointer;
-:hover {
-    background: #F0F0F0;
+Login.propTypes = { 
+  openSignInModal: PropTypes.func
 }
-`
+
 export default Login
