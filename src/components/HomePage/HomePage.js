@@ -1,11 +1,11 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import { ContentBlock } from '../index'
 
 const HomePage = () =>
-    <div>
-        <ContentBlock right />
-        <ContentBlock />
-        <ContentBlock right />
-    </div>
+  <Fragment>
+    <ContentBlock right />
+    <ContentBlock />
+    <ContentBlock right />
+  </Fragment>
 
 export default HomePage

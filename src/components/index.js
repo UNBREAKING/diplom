@@ -12,6 +12,10 @@ export { ProjectsPage } from './ProjectsPage'
 
 export { AddProjectBlock } from './AddProjectBlock'
 
-export { ProjectsBlock } from './ProjectsBlock'
+export { ItemBlock } from './ItemBlock'
 
 export { default as Login } from './Login'
+
+export { OffersPage } from './OffersPage'
+
+export { OfferBlock } from './OfferBlock'

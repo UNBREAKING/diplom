@@ -5,14 +5,15 @@ import { WhiteButton, ModalWindow } from '../common'
 
 const Login = ({ openSignInModal, visibleModal, closeSignInModal }) =>
   <Fragment>
-    <WhiteButton 
-      onClick={ () => openSignInModal() }
+    <WhiteButton
+      onClick={() => openSignInModal()}
       text="Sign In" />
-    { visibleModal 
-        && <ModalWindow 
-              width="480" 
-              header="Sign In"
-              closeHandler={() => closeSignInModal()} />
+    {
+      visibleModal
+      && <ModalWindow
+        width="480"
+        header="Sign In"
+        closeHandler={() => closeSignInModal()} />
     }
   </Fragment>
 
