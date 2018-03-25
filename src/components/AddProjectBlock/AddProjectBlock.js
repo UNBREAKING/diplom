@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { BlueButton } from '../common'
+import { BlueButton, Title } from '../common'
 
 const AddProjectBlock = () =>
   <Wrapper>
@@ -22,12 +22,6 @@ const Wrapper = styled.div`
   box-shadow: 0 0 1px black;
 `
 
-const Title = styled.h1`
-  color: #003F61;
-  font-family: 'Roboto Regular';
-  font-weight: 400;
-  text-align: center;
-`
 const Text = styled.div`
   font-size: 20px;
   color: #003F61;
