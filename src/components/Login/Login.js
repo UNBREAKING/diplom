@@ -2,6 +2,8 @@ import React, { Fragment } from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import { WhiteButton, ModalWindow } from '../common'
+import LoginForm from './LoginForm'
+import LoginButtons from './LoginButtons'
 
 const Login = ({ openSignInModal, visibleModal, closeSignInModal }) =>
   <Fragment>
@@ -9,11 +11,14 @@ const Login = ({ openSignInModal, visibleModal, closeSignInModal }) =>
       onClick={() => openSignInModal()}
       text="Sign In" />
     {
-      visibleModal
-      && <ModalWindow
+      visibleModal && 
+      <ModalWindow
         width="480"
         header="Sign In"
-        closeHandler={() => closeSignInModal()} />
+        closeHandler={() => closeSignInModal()}>
+        <LoginForm />
+        <LoginButtons />
+      </ModalWindow>
     }
   </Fragment>
 
