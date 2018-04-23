@@ -6,7 +6,8 @@ import {
   Header,
   Footer,
   ProjectsPage,
-  OffersPage
+  OffersPage,
+  RegistrationPage
 } from '../index'
 
 const App = () =>
@@ -17,7 +18,7 @@ const App = () =>
         <Route exact path='/' component={HomePage} />
         <Route exact path='/projects' component={ProjectsPage} />
         <Route exact path='/offers' component={OffersPage} />
-        <Route exact path='/registration' component={()=><h1> Registration</h1>} />
+        <Route exact path='/registration' component={RegistrationPage} />
       </Switch>
       <Footer />
     </Content>

@@ -19,3 +19,7 @@ export { default as Login } from './Login'
 export { OffersPage } from './OffersPage'
 
 export { OfferBlock } from './OfferBlock'
+
+export { RegistrationPage } from './RegistrationPage'
+
+export { FieldsContainer } from './FieldsContainer'

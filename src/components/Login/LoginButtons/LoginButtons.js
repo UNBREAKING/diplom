@@ -1,11 +1,11 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
-import { BlueButton } from '../common'
+import { BlueButton } from '../../common'
 
-const LoginButtons = () =>
+const LoginButtons = ({ goToRegistration }) =>
   <Wrapper>
     <Cell>
-    <BlueButton text="Registration" />
+    <BlueButton onClick={ goToRegistration } text="Registration" />
     </Cell>
     <Cell right>
     <BlueButton text="Forgot Password ?" />
