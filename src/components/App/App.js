@@ -7,7 +7,8 @@ import {
   Footer,
   ProjectsPage,
   OffersPage,
-  RegistrationPage
+  RegistrationPage,
+  AdminPage
 } from '../index'
 
 const App = () =>
@@ -19,6 +20,7 @@ const App = () =>
         <Route exact path='/projects' component={ProjectsPage} />
         <Route exact path='/offers' component={OffersPage} />
         <Route exact path='/registration' component={RegistrationPage} />
+        <Route exact path='/admin-page' component={AdminPage} />
       </Switch>
       <Footer />
     </Content>

@@ -1,23 +1,26 @@
 import React from 'react'
-import { createStore, applyMiddleware } from 'redux'
+import { createStore, applyMiddleware, compose } from 'redux'
 import { Provider } from 'react-redux'
-import { browserHistory } from 'react-router'
-import { BrowserRouter } from 'react-router-dom'
-import { routerMiddleware, push } from 'react-router-redux'
+import { Router} from 'react-router'
+import { routerMiddleware } from 'react-router-redux'
+import createHistory from 'history/createBrowserHistory'
+import thunk from 'redux-thunk'
 import reducers from './reducers/reducers'
 import { App } from './components'
 
-const middleware = routerMiddleware(browserHistory)
-var store = createStore(reducers,
-  applyMiddleware(middleware),
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+const history = createHistory()
+const middleware = routerMiddleware(history)
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+const store = createStore(reducers,
+  composeEnhancers(applyMiddleware(thunk, middleware))
 );
 
 const Application = () =>
   <Provider store={store}>
-    <BrowserRouter>
+    <Router history={history}>
       <App />
-    </BrowserRouter>
+    </Router>
   </Provider>
 
 export default Application

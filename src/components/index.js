@@ -23,3 +23,5 @@ export { OfferBlock } from './OfferBlock'
 export { RegistrationPage } from './RegistrationPage'
 
 export { FieldsContainer } from './FieldsContainer'
+
+export { AdminPage } from './AdminPage'

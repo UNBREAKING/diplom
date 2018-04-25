@@ -21,7 +21,7 @@ const Wrapper = styled.div`
 const Title = styled.h3`
   color: #003F61;
   font-family: 'Roboto Regular';
-  text-align: right;
+  text-align: left;
 `
 
 const Content = styled.div`

@@ -1,13 +1,13 @@
 import { combineReducers } from 'redux'
 import { reducer as reduxFormReducer } from 'redux-form';
-import { routerReducer, routerMiddleware } from 'react-router-redux'
+import { routerReducer } from 'react-router-redux'
 
 import loginModal from '../components/Login/reducer'
 
 const reducers = combineReducers({
   loginModal,
-  routerReducer,
-  form: reduxFormReducer
+  form: reduxFormReducer,
+  router: routerReducer
 })
 
 export default reducers
