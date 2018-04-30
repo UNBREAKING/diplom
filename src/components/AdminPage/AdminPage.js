@@ -2,20 +2,22 @@ import React from 'react'
 import styled from 'styled-components'
 import { Head } from '../common' 
 import { FieldsContainer } from '../index'
-import { InputWithColorPicker } from './InputWithColorPicker'
+import JobTitleForm from './JobTitleForm'
+import SkillForm from './SkillForm'
+import TechnologyForm from './TechnologyForm'
 
 const AdminPage = () => 
   <Wrapper>
     <Head name="Administration"/>
     <ContentWrapper>
     <FieldsContainer name="Job Titles">
-      <InputWithColorPicker label='Job Title'/>
+      <JobTitleForm label='Job Title'/>
     </FieldsContainer>
     <FieldsContainer name="Core Skills">
-      <InputWithColorPicker label='Core Skill'/>
+      <SkillForm label='Core Skill' name='coreSkill'/>
     </FieldsContainer>
     <FieldsContainer name="Technologies">
-      <InputWithColorPicker label='Project Technology'/>
+      <TechnologyForm label='Project Technology' name='technology'/>
     </FieldsContainer>
     </ContentWrapper>
   </Wrapper>

@@ -1,6 +1,7 @@
-import React from 'react';
-import TextField from 'material-ui/TextField';
-import { createMuiTheme, MuiThemeProvider } from 'material-ui/styles';
+import React from 'react'
+import styled from 'styled-components'
+import TextField from 'material-ui/TextField'
+import { createMuiTheme, MuiThemeProvider } from 'material-ui/styles'
 import PropTypes from 'prop-types'
 
 const blue = {
@@ -28,17 +29,21 @@ const theme = createMuiTheme({
 });
 
 
-const CommonInput = ({ label, classes }) =>
-	<div>
+const CommonInput = ({ label, input, span = false }) =>
+	<Wrapper span={span}>
 		<MuiThemeProvider theme={theme}>
 			<TextField
+        { ...input}
 				label={label} />
 		</MuiThemeProvider>
-	</div>
+	</Wrapper>
 
 CommonInput.propTypes = {
-	classes: PropTypes.shape({}),
 	label: PropTypes.string
 }
 
 export default CommonInput
+
+const Wrapper = styled.div`
+ display: ${props => props.span ? 'inline' : 'block'};
+`

@@ -16,6 +16,12 @@
 5) [redux-actions](https://redux-actions.js.org/)
 6) [styled-components](https://www.styled-components.com/) 
 7) [webpack](https://webpack.js.org/)
+
+
+## Backend Install
+1) go to https://www.mongodb.com/download-center?jmp=nav#atlas
+2) download MongoDB Atlas and MongoDB Compass
+
 ## Mockups And Spec
 1) home page:
 

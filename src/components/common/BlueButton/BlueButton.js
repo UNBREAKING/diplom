@@ -2,14 +2,15 @@ import React from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 
-const BlueButton = ({ onClick, text }) =>
-  <Button onClick={onClick}>
+const BlueButton = ({ onClick, text, type }) =>
+  <Button type={type || 'button'} onClick={onClick}>
     {text}
   </Button>
 
 BlueButton.propTypes = {
   onClick: PropTypes.func,
-  text: PropTypes.string
+  text: PropTypes.string,
+  type: PropTypes.string
 }
 
 export default BlueButton
