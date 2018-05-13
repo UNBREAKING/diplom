@@ -21,6 +21,8 @@
 ## Backend Install
 1) go to https://www.mongodb.com/download-center?jmp=nav#atlas
 2) download MongoDB Atlas and MongoDB Compass
+3) Initial create folder on C disk : data/db
+4) Open mongod.exe in folder where you have installer MongoDB: for example here: `C:\Program Files\MongoDB\Server\3.6\bin` ( you should do it before you start `nodemon app.js` command)
 
 ## Концепция сайта "InProject"
 

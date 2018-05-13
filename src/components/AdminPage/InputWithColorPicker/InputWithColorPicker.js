@@ -4,7 +4,7 @@ import { SliderPicker } from 'react-color';
 import { CommonInput, BlueButton } from '../../common'
 import { Field } from 'redux-form'
 
-const InputWithColorPicker = ({ label, name, setColor, color }) =>
+const InputWithColorPicker = ({ label, name, setColor, color, clickHandler }) =>
   <form>
     <Field name={name} label={label} span type="text" component={CommonInput} />
     <ColorWrapper>
@@ -14,7 +14,7 @@ const InputWithColorPicker = ({ label, name, setColor, color }) =>
         onChange={setColor} />
     </ColorWrapper>
     <ButtonContainer>
-      <BlueButton text='Add' type='submit' />
+      <BlueButton text='Add' onClick={clickHandler}/>
     </ButtonContainer>
   </form>
 
