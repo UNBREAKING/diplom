@@ -24,4 +24,4 @@ export { RegistrationPage } from './RegistrationPage'
 
 export { FieldsContainer } from './FieldsContainer'
 
-export { AdminPage } from './AdminPage'
+export { default as AdminPage } from './AdminPage'

@@ -2,6 +2,7 @@ var path = require('path');
 var express = require('express');
 var bodyParser = require("body-parser");
 var mongoose = require('mongoose');
+var q = require('q')
 
 var app = express();
 var jsonParser = bodyParser.json();
@@ -99,6 +100,18 @@ const addTechnology = function (req, res) {
     })
 }
 
+const getAdminPage = function (req, res) {
+    var jobs = JobTitleModel.find().exec()
+    var skills = CoreSkillModel.find().exec()
+    var technologies = TechnologyModel.find().exec()
+    
+    q.all([jobs, skills, technologies]).then(([jobs, skills, technologies]) => {
+        const result = { jobs, skills, technologies }
+        res.send(result)
+      });
+}
+
+app.get('/api/getAdminPage', jsonParser, getAdminPage)
 app.get('/*', landingPage)
 app.post('/api/addJobTitle', jsonParser, addJobTitle)
 app.post('/api/addCoreSkill', jsonParser, addCoreSkill)

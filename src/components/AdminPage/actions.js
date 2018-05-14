@@ -1,3 +1,4 @@
+import { createAction } from 'redux-actions'
 import fetch from '../../services/fetch'
 
 export const saveJobTitle = color => ( dispatch, getState ) => {
@@ -65,3 +66,20 @@ export const saveTechnology = color => ( dispatch, getState ) => {
     .catch((err) => console.log(err)) :
     alert('Field Job Title is empty')
 }
+
+export const saveJobs = createAction("ADMIN_PAGE/SAVE_JOB_TITLES")
+export const saveSkills = createAction("ADMIN_PAGE/SAVE_CORE_SKILLS")
+export const saveTechnologies = createAction("ADMIN_PAGE/SAVE_TECHNOLOGIES")
+
+export const getAdminPageData = () => dispatch =>
+  fetch({ 
+    url: 'http://localhost:3000/api/getAdminPage' , 
+    method: 'GET'
+  })
+  .then(data => data.json())
+  .then(({ jobs, skills , technologies }) => {
+    dispatch(saveJobs(jobs))
+    dispatch(saveSkills(skills))
+    dispatch(saveTechnologies(technologies))
+  })
+  .catch((err) => console.log(err))
