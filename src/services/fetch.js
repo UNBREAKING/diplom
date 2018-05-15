@@ -4,3 +4,4 @@ export default ({ url, method, body }) =>
     body,
     headers: { "Content-Type": "application/json" }
   })
+  .then(data => data.json())

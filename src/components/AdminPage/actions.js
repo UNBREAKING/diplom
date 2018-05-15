@@ -1,6 +1,9 @@
 import { createAction } from 'redux-actions'
 import fetch from '../../services/fetch'
 
+export const addJobTitle = createAction("ADMIN_PAGE/ADD_JOB_TITLE_TO_LIST")
+export const removeJobTitle = createAction("ADMIN_PAGE/REMOVE_JOB_TITLE_TO_LIST")
+
 export const saveJobTitle = color => ( dispatch, getState ) => {
   const { 
     form : { 
@@ -18,10 +21,17 @@ export const saveJobTitle = color => ( dispatch, getState ) => {
       method: 'POST', 
       body: JSON.stringify({ color, name: jobTitle }) 
     })
-    .then(() => console.log('success'))
+    .then((result) =>
+      result.error ?
+        alert(result.error) :
+        dispatch(addJobTitle(result))
+    )
     .catch((err) => console.log(err)) :
     alert('Field Job Title is empty')
 }
+
+export const addSkill = createAction("ADMIN_PAGE/ADD_SKILL_TO_LIST")
+export const removeSkill = createAction("ADMIN_PAGE/REMOVE_SKILL_TO_LIST")
 
 export const saveCoreSkill = color => ( dispatch, getState ) => {
   const { 
@@ -40,10 +50,17 @@ export const saveCoreSkill = color => ( dispatch, getState ) => {
       method: 'POST', 
       body: JSON.stringify({ color, name: coreSkill }) 
     })
-    .then(() => console.log('success'))
+    .then((result) =>
+      result.error ?
+        alert(result.error) :
+        dispatch(addSkill(result))
+    )
     .catch((err) => console.log(err)) :
     alert('Field Job Title is empty')
 }
+
+export const addTechnology = createAction("ADMIN_PAGE/ADD_TECHNOLOGY_TO_LIST")
+export const removeTechnology = createAction("ADMIN_PAGE/REMOVE_TECHNOLOGY_TO_LIST")
 
 export const saveTechnology = color => ( dispatch, getState ) => {
   const { 
@@ -62,7 +79,11 @@ export const saveTechnology = color => ( dispatch, getState ) => {
       method: 'POST', 
       body: JSON.stringify({ color, name: technology }) 
     })
-    .then(() => console.log('success'))
+    .then((result) =>
+      result.error ?
+        alert(result.error) :
+        dispatch(addTechnology(result))
+    )
     .catch((err) => console.log(err)) :
     alert('Field Job Title is empty')
 }
@@ -76,7 +97,6 @@ export const getAdminPageData = () => dispatch =>
     url: 'http://localhost:3000/api/getAdminPage' , 
     method: 'GET'
   })
-  .then(data => data.json())
   .then(({ jobs, skills , technologies }) => {
     dispatch(saveJobs(jobs))
     dispatch(saveSkills(skills))
