@@ -132,7 +132,18 @@ const removeTechnology = function (req, res) {
     })
 }
 
+const getRegistrationPage = function (req, res) {
+    var jobs = JobTitleModel.find().exec()
+    var skills = CoreSkillModel.find().exec()
+    
+    q.all([jobs, skills]).then(([jobs, skills]) => {
+        const result = { jobs, skills }
+        res.send(result)
+      });
+}
+
 app.get('/getAdminPage', jsonParser, getAdminPage)
+app.get('/getRegistrationPage', jsonParser, getRegistrationPage)
 app.get('/*', landingPage)
 app.post('/api/addJobTitle', jsonParser, addJobTitle)
 app.post('/api/addCoreSkill', jsonParser, addCoreSkill)

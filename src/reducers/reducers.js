@@ -4,10 +4,12 @@ import { routerReducer } from 'react-router-redux'
 
 import loginModal from '../components/Login/reducer'
 import adminPage from '../components/AdminPage/reducer'
+import registrationPage from '../components/RegistrationPage/reducer'
 
 const reducers = combineReducers({
   loginModal,
   adminPage,
+  registrationPage,
   form: reduxFormReducer,
   router: routerReducer
 })

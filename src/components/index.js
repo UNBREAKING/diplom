@@ -20,7 +20,7 @@ export { OffersPage } from './OffersPage'
 
 export { OfferBlock } from './OfferBlock'
 
-export { RegistrationPage } from './RegistrationPage'
+export { default as RegistrationPage } from './RegistrationPage'
 
 export { FieldsContainer } from './FieldsContainer'
 
