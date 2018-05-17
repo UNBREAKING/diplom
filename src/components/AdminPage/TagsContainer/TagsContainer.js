@@ -6,7 +6,8 @@ const TagsContainer = ({ tags = [], removeHandler }) =>
   <Wrapper>
     {
       tags.map(({ name, color, _id }) => 
-        <Tag 
+        <Tag
+          key={_id}
           color={color} 
           name={name}
           removeHandler={() => removeHandler(_id)} />

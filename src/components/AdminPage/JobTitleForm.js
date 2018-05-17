@@ -9,7 +9,7 @@ export default compose(
     form: 'jobForm', 
   }),
   connect(null, { saveJobTitle }),
-  withState('color', 'setColor', '#fff'),
+  withState('color', 'setColor', '#000000'),
   withHandlers({
     setColor: ({ setColor }) => ({ hex }) => setColor(() => hex),
     clickHandler: ({ color, saveJobTitle }) => () => saveJobTitle(color)

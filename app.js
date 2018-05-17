@@ -111,11 +111,35 @@ const getAdminPage = function (req, res) {
       });
 }
 
-app.get('/api/getAdminPage', jsonParser, getAdminPage)
+const removeJobTitle = function (req, res) {
+    JobTitleModel.findByIdAndRemove(req.body._id, function(err){
+        err ? res.status(500).send({ error: 'Something Wrong' }) :
+        res.send({ message: 'Job Title deleted successfull' })
+    })
+}
+
+const removeCoreSkill = function (req, res) {
+    CoreSkillModel.findByIdAndRemove(req.body._id, function(err){
+        err ? res.status(500).send({ error: 'Something Wrong' }) :
+        res.send({ message: 'Core Skill deleted successfull' })
+    })
+}
+
+const removeTechnology = function (req, res) {
+    TechnologyModel.findByIdAndRemove(req.body._id, function(err){
+        err ? res.status(500).send({ error: 'Something Wrong' }) :
+        res.send({ message: 'Technology deleted successfull' })
+    })
+}
+
+app.get('/getAdminPage', jsonParser, getAdminPage)
 app.get('/*', landingPage)
 app.post('/api/addJobTitle', jsonParser, addJobTitle)
 app.post('/api/addCoreSkill', jsonParser, addCoreSkill)
 app.post('/api/addTechnology', jsonParser, addTechnology)
+app.delete('/api/deleteJobTitle', jsonParser, removeJobTitle)
+app.delete('/api/deleteCoreSkill', jsonParser, removeCoreSkill)
+app.delete('/api/deleteTechnology', jsonParser, removeTechnology)
 
 var PORT = 3000;
 app.listen(PORT, function () {

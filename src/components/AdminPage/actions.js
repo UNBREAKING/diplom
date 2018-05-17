@@ -4,6 +4,22 @@ import fetch from '../../services/fetch'
 export const addJobTitle = createAction("ADMIN_PAGE/ADD_JOB_TITLE_TO_LIST")
 export const removeJobTitle = createAction("ADMIN_PAGE/REMOVE_JOB_TITLE_TO_LIST")
 
+export const deleteJobTitle = _id => dispatch => {
+
+  fetch({
+    url: 'http://localhost:3000/api/deleteJobTitle', 
+    method: 'DELETE', 
+    body: JSON.stringify({ _id })  
+  }).then(({ error, message }) => { 
+      error ?
+        alert(error) : 
+        alert(message)
+      !error && dispatch(removeJobTitle(_id)) 
+  })
+  .catch((err) => console.log(err))
+
+}
+
 export const saveJobTitle = color => ( dispatch, getState ) => {
   const { 
     form : { 
@@ -17,11 +33,11 @@ export const saveJobTitle = color => ( dispatch, getState ) => {
 
   jobTitle ?
     fetch({ 
-      url: 'http://localhost:3000/api/addJobTitle' , 
+      url: 'http://localhost:3000/api/addJobTitle', 
       method: 'POST', 
       body: JSON.stringify({ color, name: jobTitle }) 
     })
-    .then((result) =>
+    .then(result =>
       result.error ?
         alert(result.error) :
         dispatch(addJobTitle(result))
@@ -32,6 +48,22 @@ export const saveJobTitle = color => ( dispatch, getState ) => {
 
 export const addSkill = createAction("ADMIN_PAGE/ADD_SKILL_TO_LIST")
 export const removeSkill = createAction("ADMIN_PAGE/REMOVE_SKILL_TO_LIST")
+
+export const deleteSkill = _id => dispatch => {
+
+  fetch({
+    url: 'http://localhost:3000/api/deleteCoreSkill', 
+    method: 'DELETE', 
+    body: JSON.stringify({ _id })  
+  }).then(({ error, message }) => { 
+      error ?
+        alert(error) : 
+        alert(message)
+      !error && dispatch(removeSkill(_id)) 
+  })
+  .catch((err) => console.log(err))
+
+}
 
 export const saveCoreSkill = color => ( dispatch, getState ) => {
   const { 
@@ -46,11 +78,11 @@ export const saveCoreSkill = color => ( dispatch, getState ) => {
 
   coreSkill ?
     fetch({ 
-      url: 'http://localhost:3000/api/addCoreSkill' , 
+      url: 'http://localhost:3000/api/addCoreSkill', 
       method: 'POST', 
       body: JSON.stringify({ color, name: coreSkill }) 
     })
-    .then((result) =>
+    .then(result =>
       result.error ?
         alert(result.error) :
         dispatch(addSkill(result))
@@ -61,6 +93,22 @@ export const saveCoreSkill = color => ( dispatch, getState ) => {
 
 export const addTechnology = createAction("ADMIN_PAGE/ADD_TECHNOLOGY_TO_LIST")
 export const removeTechnology = createAction("ADMIN_PAGE/REMOVE_TECHNOLOGY_TO_LIST")
+
+export const deleteTechnology = _id => dispatch => {
+
+  fetch({
+    url: 'http://localhost:3000/api/deleteTechnology', 
+    method: 'DELETE', 
+    body: JSON.stringify({ _id })  
+  }).then(({ error, message }) => { 
+      error ?
+        alert(error) : 
+        alert(message)
+      !error && dispatch(removeTechnology(_id)) 
+  })
+  .catch((err) => console.log(err))
+
+}
 
 export const saveTechnology = color => ( dispatch, getState ) => {
   const { 
@@ -75,11 +123,11 @@ export const saveTechnology = color => ( dispatch, getState ) => {
 
   technology ?
     fetch({ 
-      url: 'http://localhost:3000/api/addTechnology' , 
+      url: 'http://localhost:3000/api/addTechnology', 
       method: 'POST', 
       body: JSON.stringify({ color, name: technology }) 
     })
-    .then((result) =>
+    .then(result =>
       result.error ?
         alert(result.error) :
         dispatch(addTechnology(result))
@@ -94,7 +142,7 @@ export const saveTechnologies = createAction("ADMIN_PAGE/SAVE_TECHNOLOGIES")
 
 export const getAdminPageData = () => dispatch =>
   fetch({ 
-    url: 'http://localhost:3000/api/getAdminPage' , 
+    url: 'http://localhost:3000/getAdminPage', 
     method: 'GET'
   })
   .then(({ jobs, skills , technologies }) => {

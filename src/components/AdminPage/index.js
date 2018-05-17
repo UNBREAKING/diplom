@@ -3,9 +3,9 @@ import { compose, lifecycle } from 'recompose'
 import { connect } from 'react-redux'
 import { 
   getAdminPageData , 
-  removeJobTitle,
-  removeSkill,
-  removeTechnology 
+  deleteJobTitle,
+  deleteSkill,
+  deleteTechnology 
 } from './actions'
 
 const mapStateToProps = ({
@@ -22,9 +22,9 @@ const mapStateToProps = ({
 
 const dispatchToProps = {
   getAdminPageData , 
-  removeJobTitle,
-  removeSkill,
-  removeTechnology 
+  deleteJobTitle,
+  deleteSkill,
+  deleteTechnology 
 }
 
 export default compose(

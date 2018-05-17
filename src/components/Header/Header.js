@@ -33,6 +33,7 @@ const Wrapper = styled.div`
   width: 100%;
   box-shadow: 0 0 10px black;
   position: fixed;
+  z-index: 1000;
 `
 
 const ProjectName = styled.span`

@@ -11,24 +11,24 @@ const AdminPage = ({
   jobs, 
   skills, 
   technologies,
-  removeJobTitle,
-  removeSkill,
-  removeTechnology 
+  deleteJobTitle,
+  deleteSkill,
+  deleteTechnology 
 }) => 
   <Wrapper>
     <Head name="Administration"/>
     <ContentWrapper>
     <FieldsContainer name="Job Titles">
       <JobTitleForm label='Job Title' name='jobTitle'/>
-      <TagsContainer tags={ jobs } removeHandler={ removeJobTitle } />
+      <TagsContainer tags={ jobs } removeHandler={ deleteJobTitle } />
     </FieldsContainer>
     <FieldsContainer name="Core Skills">
       <SkillForm label='Core Skill' name='coreSkill'/>
-      <TagsContainer tags={ skills } removeHandler={ removeSkill } />
+      <TagsContainer tags={ skills } removeHandler={ deleteSkill } />
     </FieldsContainer>
     <FieldsContainer name="Technologies">
       <TechnologyForm label='Project Technology' name='technology'/>
-      <TagsContainer tags={ technologies } removeHandler={ removeTechnology } />
+      <TagsContainer tags={ technologies } removeHandler={ deleteTechnology } />
     </FieldsContainer>
     </ContentWrapper>
   </Wrapper>
