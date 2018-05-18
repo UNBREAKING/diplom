@@ -2,12 +2,12 @@ import { combineReducers } from 'redux'
 import { reducer as reduxFormReducer } from 'redux-form';
 import { routerReducer } from 'react-router-redux'
 
-import loginModal from '../components/Login/reducer'
+import login from '../components/Login/reducer'
 import adminPage from '../components/AdminPage/reducer'
 import registrationPage from '../components/RegistrationPage/reducer'
 
 const reducers = combineReducers({
-  loginModal,
+  login,
   adminPage,
   registrationPage,
   form: reduxFormReducer,

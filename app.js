@@ -52,7 +52,7 @@ var User = new Schema({
 var UserModel = mongoose.model('User', User);
 
 //Bind connection to error event (to get notification of connection errors)
-db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+db.on('error', console.error.bind(console, 'MongoDB connection error:'))
 
 
 app.use(express.static(__dirname))
@@ -65,7 +65,7 @@ const landingPage = function (req, res) {
 
 const addJobTitle = function (req, res) {
 
-    if (!req.body && !req.body.name) return res.status(500).send({ error: 'Empty name for job title' });
+    if (!req.body && !req.body.name) return res.status(500).send({ error: 'Empty name for job title' })
 
     JobTitleModel.findOne({ name: req.body.name }, function (err, resad) {
         if (resad) return res.status(500).send({ error: 'You have already added this title' });
@@ -99,7 +99,7 @@ const addCoreSkill = function (req, res) {
 
 const addTechnology = function (req, res) {
 
-    if (!req.body && !req.body.name) return res.status(500).send({ error: 'Empty name for technology' });
+    if (!req.body && !req.body.name) return res.status(500).send({ error: 'Empty name for technology' })
 
     TechnologyModel.findOne({ name: req.body.name }, function (err, resad) {
         if (resad) return res.status(500).send({ error: 'You have already added this technology' });
@@ -165,7 +165,7 @@ const registration = function (req, res) {
     (!req.body.surname && res.status(500).send({ error: "Please add your surname" }))
 
     UserModel.findOne({ email: req.body.email }, function (err, resad) {
-        if (resad) return res.status(500).send({ error: 'User with this email already exists' });
+        if (resad) return res.status(500).send({ error: 'User with this email already exists' })
 
         var user = new UserModel({
             email: req.body.email,
@@ -187,13 +187,28 @@ const registration = function (req, res) {
     })
 }
 
+const logout = function (req, res) {
+    res.clearCookie('session_token').send({ message: 'success'});
+}
+
+const login = function (re, res) {
+    UserModel.findOne({ email: req.body.email }, function (err, user) {
+        if (!user) return res.status(500).send({ error: 'User or password is wrong' })
+        if (user.password !== req.body.password) return res.status(500).send({ error: 'User or password is wrong' })
+        
+        res.cookie('session_token', decodeURI(user._id)).send({ message: 'success'})
+    })
+}
+
 app.get('/getAdminPage', jsonParser, getAdminPage)
 app.get('/getRegistrationPage', jsonParser, getRegistrationPage)
 app.get('/*', landingPage)
 app.post('/api/addJobTitle', jsonParser, addJobTitle)
 app.post('/api/addCoreSkill', jsonParser, addCoreSkill)
 app.post('/api/addTechnology', jsonParser, addTechnology)
-app.post('/api/registration',jsonParser, registration)
+app.post('/api/registration', jsonParser, registration)
+app.post('/api/login', jsonParser, login)
+app.post('/api/logout', jsonParser, logout)
 app.delete('/api/deleteJobTitle', jsonParser, removeJobTitle)
 app.delete('/api/deleteCoreSkill', jsonParser, removeCoreSkill)
 app.delete('/api/deleteTechnology', jsonParser, removeTechnology)

@@ -1,6 +1,7 @@
 import { createAction } from 'redux-actions'
 import fetch from '../../services/fetch'
 import { push } from 'react-router-redux'
+import { setUserToken } from '../Login/actions'
 
 export const saveJobs = createAction("REGISTRATION_PAGE/SAVE_JOB_TITLES")
 export const saveSkills = createAction("REGISTRATION_PAGE/SAVE_CORE_SKILLS")
@@ -44,6 +45,7 @@ export const register = () => (dispatch, getState) => {
       if( error ){
         dispatch(saveError(error))
       } else {
+        dispatch(setUserToken())
         dispatch(push('/projects'))
         dispatch(cleanError())
       }

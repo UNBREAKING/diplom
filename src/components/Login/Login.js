@@ -5,11 +5,24 @@ import { WhiteButton, ModalWindow } from '../common'
 import LoginForm from './LoginForm'
 import LoginButtons from './LoginButtons'
 
-const Login = ({ openSignInModal, visibleModal, closeSignInModal }) =>
+const Login = ({ 
+  openSignInModal, 
+  visibleModal, 
+  closeSignInModal, 
+  user_token,
+  signout 
+}) =>
   <Fragment>
-    <WhiteButton
-      onClick={() => openSignInModal()}
-      text="Sign In" />
+    {
+      user_token ?
+        <WhiteButton
+          onClick={() => signout()}
+          text="Sign Out" /> :
+        <WhiteButton
+          onClick={() => openSignInModal()}
+          text="Sign In" />
+        
+    }
     {
       visibleModal && 
       <ModalWindow

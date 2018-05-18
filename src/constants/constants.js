@@ -16,3 +16,5 @@ export const blue = {
   A400: dark_blue,
   A700: dark_blue
 };
+
+export const USER_TOKEN = 'session_token'

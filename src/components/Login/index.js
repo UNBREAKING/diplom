@@ -1,13 +1,32 @@
+import { compose, lifecycle} from 'recompose'
 import { connect } from 'react-redux'
-import { openSignInModal, closeSignInModal } from './actions'
+import { 
+  openSignInModal, 
+  closeSignInModal, 
+  setUserToken,
+  signout 
+} from './actions'
 import Login from './Login'
 
 const mapStateToProps = ({
-  loginModal: {
-    visibleModal
+  login: {
+    visibleModal,
+    user_token
   }
 }) => ({
-  visibleModal
+  visibleModal,
+  user_token
 })
 
-export default connect(mapStateToProps, { openSignInModal, closeSignInModal })(Login)
+const dispatchToProps = { openSignInModal, closeSignInModal, setUserToken, signout }
+
+export default compose(
+  connect(mapStateToProps, dispatchToProps),
+  lifecycle({
+    componentDidMount(){
+      const { setUserToken } = this.props
+
+      setUserToken()
+    }
+  })
+)(Login)
