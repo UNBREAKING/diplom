@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import JobTitleContainer from './JobTitleContainer'
+import SkillContainer from './SkillContainer'
 import { selectSkill } from '../actions'
 
 const mapStateToProps = ({
@@ -14,5 +14,5 @@ const mapStateToProps = ({
   selectedId
 })
 
-export default connect(mapStateToProps,{ selectSkill })(JobTitleContainer)
+export default connect(mapStateToProps,{ selectSkill })(SkillContainer)
  

@@ -22,6 +22,8 @@ const Title = styled.h3`
   color: #003F61;
   font-family: 'Roboto Regular';
   text-align: left;
+  margin-bottom: 0px;
+  margin-top: 10px;
 `
 
 const Content = styled.div`

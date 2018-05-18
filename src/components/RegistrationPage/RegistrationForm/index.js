@@ -2,24 +2,19 @@ import { reduxForm } from 'redux-form'
 import { compose, withHandlers } from 'recompose'
 import { connect } from 'react-redux'
 import RegistrationForm from './RegistrationForm'
-import { selectJobTitle } from '../actions'
+import { register } from '../actions'
 
 const mapStateToProps = ({
   registrationPage: {
-    jobs,
-    selectedJobTitle
+    jobs
   }
 }) => ({
-  jobs,
-  selectedJobTitle
+  jobs
 })
 
 export default compose(
   reduxForm({
     form: 'registration', 
   }),
-  connect(mapStateToProps,{ selectJobTitle }),
-  withHandlers({
-    selectJob: ({ selectJobTitle }) => event => selectJobTitle(event.target.value)
-  })
+  connect(mapStateToProps, { register })
 )(RegistrationForm)

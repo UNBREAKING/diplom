@@ -37,6 +37,20 @@ var Technology = new Schema({
 
 var TechnologyModel = mongoose.model('Technology', Technology);
 
+var User = new Schema({
+    email: String,
+    password: String,
+    name: String,
+    surname: String,
+    job: { type: Schema.Types.ObjectId, ref: 'JobTitle' },
+    skill: { type: Schema.Types.ObjectId, ref: 'CoreSkill' },
+    skype: String,
+    git: String,
+    facebook: String
+})
+
+var UserModel = mongoose.model('User', User);
+
 //Bind connection to error event (to get notification of connection errors)
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
@@ -142,12 +156,44 @@ const getRegistrationPage = function (req, res) {
       });
 }
 
+const registration = function (req, res) {
+
+    (!req.body.email && res.status(500).send({ error: 'Please add email' })) ||
+    (!req.body.password && res.status(500).send({ error: 'Please enter password'})) ||
+    (req.body.password !== req.body.secondPassword && res.status(500).send({ error: "Passwords doesn't match" })) ||
+    (!req.body.name && res.status(500).send({ error: "Please add your name" })) ||
+    (!req.body.surname && res.status(500).send({ error: "Please add your surname" }))
+
+    UserModel.findOne({ email: req.body.email }, function (err, resad) {
+        if (resad) return res.status(500).send({ error: 'User with this email already exists' });
+
+        var user = new UserModel({
+            email: req.body.email,
+            password: req.body.password,
+            name: req.body.name,
+            surname: req.body.surname,
+            job: req.body.job,
+            skill: req.body.skill,
+            skype: req.body.skype,
+            git: req.body.git,
+            facebook: req.body.facebook
+        });
+        user.save().then(() => {
+            UserModel.findOne({ email: req.body.email }, function (err, user) {
+                res.cookie('session_token', decodeURI(user._id)).send({ message: 'success'})
+            })
+
+        });
+    })
+}
+
 app.get('/getAdminPage', jsonParser, getAdminPage)
 app.get('/getRegistrationPage', jsonParser, getRegistrationPage)
 app.get('/*', landingPage)
 app.post('/api/addJobTitle', jsonParser, addJobTitle)
 app.post('/api/addCoreSkill', jsonParser, addCoreSkill)
 app.post('/api/addTechnology', jsonParser, addTechnology)
+app.post('/api/registration',jsonParser, registration)
 app.delete('/api/deleteJobTitle', jsonParser, removeJobTitle)
 app.delete('/api/deleteCoreSkill', jsonParser, removeCoreSkill)
 app.delete('/api/deleteTechnology', jsonParser, removeTechnology)

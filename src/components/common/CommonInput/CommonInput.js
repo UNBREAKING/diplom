@@ -1,26 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
+import PropTypes from 'prop-types'
 import TextField from 'material-ui/TextField'
 import { createMuiTheme, MuiThemeProvider } from 'material-ui/styles'
-import PropTypes from 'prop-types'
-
-const blue = {
-  50: '#003F61',
-  100: '#003F61',
-  200: '#003F61',
-  300: '#003F61',
-  400: '#003F61',
-  500: '#003F61',
-  600: '#003F61',
-  700: '#003F61',
-  800: '#003F61',
-  900: '#003F61',
-  A100: '#003F61',
-  A200: '#003F61',
-  A400: '#003F61',
-  A700: '#003F61'
-};
-
+import { blue } from '../../../constants/constants'
 
 const theme = createMuiTheme({
   palette: {
@@ -45,5 +28,6 @@ CommonInput.propTypes = {
 export default CommonInput
 
 const Wrapper = styled.div`
- display: ${props => props.span ? 'inline' : 'block'};
+  margin-top: 10px;
+  display: ${props => props.span ? 'inline' : 'block'};
 `

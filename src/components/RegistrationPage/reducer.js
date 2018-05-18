@@ -3,14 +3,15 @@ import {
   saveJobs, 
   saveSkills,
   selectSkill,
-  selectJobTitle
+  saveError,
+  cleanError
  } from './actions'
 
 const initialState = {
   jobs: [],
   skills: [],
   selectedSkill : {},
-  selectedJobTitle : ""
+  error: null
 }
 
 const registrationPage = handleActions({
@@ -18,7 +19,8 @@ const registrationPage = handleActions({
   [saveSkills]: (state, { payload }) => ({ ...state, skills: payload }),
   [selectSkill]: (state, { payload }) => 
     ({ ...state, selectedSkill: state.skills.find(({ _id }) => _id === payload )}),
-  [selectJobTitle]: (state, { payload }) => ({ ...state, selectedJobTitle: payload })
+  [saveError]: (state, { payload }) => ({ ...state, error: payload }),
+  [cleanError]: state => ({ ...state, error: null })
 }, initialState)
 
 export default registrationPage

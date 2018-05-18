@@ -1,34 +1,32 @@
 import React from 'react'
 import styled from 'styled-components'
-import { CommonInput, BlueButton } from '../../common'
+import { 
+  CommonInput, 
+  BlueButton, 
+  CommonSelect, 
+  CommonPassword 
+} from '../../common'
 import { FieldsContainer } from '../../index'
-import JobTitleContainer from '../JobTitleContainer'
+import SkillContainer from '../SkillContainer'
 import { Field } from 'redux-form'
-import Select from 'material-ui/Select';
 
-const RegistrationForm = ({jobs, selectedJobTitle, selectJob }) =>
+const RegistrationForm = ({ jobs, register }) =>
   <form>
     <FieldsContainer name="Accaunt">
       <Field name="email" label="Email" component={CommonInput} />
-      <Field name="password" label="Password" component={CommonInput} />
-      <Field name="secondPassword" label="Confirm Password" component={CommonInput} />
+      <Field name="password" id="password" label="Password" component={CommonPassword} />
+      <Field name="secondPassword" id="confirmPassword" label="Confirm Password" component={CommonPassword} />
     </FieldsContainer>
     <FieldsContainer name="Personal Data">
       <Field name="name" label="Name" component={CommonInput} />
       <Field name="surname" label="Surname" component={CommonInput} />
-      <Select
-        native
-        value={selectedJobTitle}
-        onChange={selectJob}
-        inputProps={{
-          name: 'jobTitle',
-          id: 'jobTitle'
-        }}>
+      <Field name="job" id="jobSelector" label="Job Title" component={CommonSelect} >
+        <option value=""></option>
         { 
           jobs.map(({ name, _id }) => <option key={_id} value={_id}>{ name }</option>)
         }
-      </Select>
-      <JobTitleContainer />
+      </Field>
+      <SkillContainer />
     </FieldsContainer>
     <FieldsContainer name="Social Networks">
       <Field name="skype" label="Skype" component={CommonInput} />
@@ -36,7 +34,7 @@ const RegistrationForm = ({jobs, selectedJobTitle, selectJob }) =>
       <Field name="facebook" label="Facebook" component={CommonInput} />
     </FieldsContainer>
     <ButtonWrapper>
-      <BlueButton text="Register"/>
+      <BlueButton text="Register" onClick={register}/>
     </ButtonWrapper>
   </form>
 
