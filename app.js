@@ -191,11 +191,11 @@ const logout = function (req, res) {
     res.clearCookie('session_token').send({ message: 'success'});
 }
 
-const login = function (re, res) {
-    UserModel.findOne({ email: req.body.email }, function (err, user) {
-        if (!user) return res.status(500).send({ error: 'User or password is wrong' })
-        if (user.password !== req.body.password) return res.status(500).send({ error: 'User or password is wrong' })
-        
+const login = function (req, res) {
+    UserModel.findOne({ email: req.body.login }, function (err, user) {
+        if (!user) return res.status(500).send({ error: 'User login or password is wrong' })
+        if (user.password !== req.body.password) return res.status(500).send({ error: 'User login or password is wrong' })
+
         res.cookie('session_token', decodeURI(user._id)).send({ message: 'success'})
     })
 }

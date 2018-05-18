@@ -24,3 +24,29 @@ export const signout = () => dispatch =>
       dispatch(cleanUserToken())
   )
   .catch((err) => console.log(err))
+
+export const signin = () => (dispatch, getState) => {
+  const { 
+    form: {
+      login: {
+        values = {}
+      } = {}
+    } = {}
+  } = getState()
+  
+  fetch({ 
+    url: 'http://localhost:3000/api/login', 
+    method: 'POST',
+    body: JSON.stringify(values)
+  })
+  .then(result => {
+    if(result.error) {
+      alert(result.error) 
+    } else {
+      dispatch(setUserToken())
+      dispatch(closeSignInModal())
+    }
+    }
+  )
+  .catch((err) => console.log(err))
+}
