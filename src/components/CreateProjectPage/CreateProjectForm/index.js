@@ -1,6 +1,19 @@
-import CreateProjectForm from './CreateProjectForm'
 import { reduxForm } from 'redux-form'
+import { connect } from 'react-redux'
+import { compose,withProps } from 'recompose'
+import CreateProjectForm from './CreateProjectForm'
 
-export default reduxForm({
-  form: 'creatProject'
-})(CreateProjectForm)
+const mapStateToProps = ({
+  createProjectPage: {
+    jobs
+  }
+}) => ({
+  jobs
+})
+
+export default compose(
+  reduxForm({
+    form: 'creatProject'
+  }),
+  connect(mapStateToProps)
+)(CreateProjectForm)

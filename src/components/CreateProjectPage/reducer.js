@@ -3,13 +3,16 @@ import {
   saveJobs,
   saveTechnologies,
   saveTechnology,
-  unsaveTechnology
+  unsaveTechnology,
+  saveJob,
+  unsaveJob
  } from './actions'
 
 const initialState = {
   jobs: [],
   technologies: [],
-  selectedTechnologies: []
+  selectedTechnologies: [],
+  savedJobs: []
 }
 
 const createProjectPage = handleActions({
@@ -17,6 +20,8 @@ const createProjectPage = handleActions({
   [saveTechnologies]: (state, { payload }) => ({ ...state, technologies: payload }),
   [saveTechnology]: (state, { payload }) => ({ ...state, selectedTechnologies: [...state.selectedTechnologies, payload] }),
   [unsaveTechnology]: (state, { payload }) => ({ ...state, selectedTechnologies: state.selectedTechnologies.filter(id=> id !==payload)}),
+  [saveJob]: (state, { payload }) => ({ ...state, savedJobs: [...state.savedJobs, payload ]}),
+  [unsaveJob]: (state, { payload }) => ({ ...state, savedJobs: state.savedJobs.filter((el, index)=> payload !== index )})
 }, initialState)
 
 export default createProjectPage

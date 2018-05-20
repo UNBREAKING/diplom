@@ -11,6 +11,7 @@ export default Tag
 const Wrapper = styled.span`
   color: white;
   padding: 5px 10px;
+  cursor: pointer;
   border-radius: 2px;
   display: inline-block;
   margin-left: 5px;

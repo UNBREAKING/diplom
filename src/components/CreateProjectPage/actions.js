@@ -30,3 +30,5 @@ export const selectTechnology = (_id) => (dispatch, getState) => {
     dispatch(saveTechnology(_id))
 }
 
+export const saveJob = createAction('CREATE_PROJECT_PAGE/SAVE_JOB')
+export const unsaveJob = createAction('CREATE_PROJECT_PAGE/UNSAVE_JOB')

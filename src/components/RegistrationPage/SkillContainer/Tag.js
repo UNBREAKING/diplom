@@ -15,6 +15,7 @@ const Wrapper = styled.span`
   display: inline-block;
   margin-left: 5px;
   margin-top: 5px;
+  cursor: pointer;
   box-shadow: 0 0 1px black;
   background: ${props => props.color || `black`};
   ${props => props.isSelected && css`
