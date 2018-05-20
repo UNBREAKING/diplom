@@ -2,14 +2,14 @@ import React from 'react'
 import styled from 'styled-components'
 import { BlueButton, Title } from '../../common'
 
-const AddProjectBlock = ({ user_token }) =>
+const AddProjectBlock = ({ user_token, navigateToCreateProjectPage }) =>
   <Wrapper>
     <Title>
       Add Your Project
     </Title>
     { 
       user_token ? 
-        <BlueButton text="Create Project" /> :
+        <BlueButton text="Create Project"  onClick={navigateToCreateProjectPage}/> :
         <BlueButton text="Sign In For Creating" />
     }
     <Text>

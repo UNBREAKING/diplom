@@ -8,7 +8,8 @@ import {
   ProjectsPage,
   UsersPage,
   RegistrationPage,
-  AdminPage
+  AdminPage,
+  CreateProjectPage
 } from '../index'
 
 const App = () =>
@@ -21,6 +22,7 @@ const App = () =>
         <Route exact path='/users' component={UsersPage} />
         <Route exact path='/registration' component={RegistrationPage} />
         <Route exact path='/admin-page' component={AdminPage} />
+        <Route exact path='/create-project' component={CreateProjectPage} />
       </Switch>
       <Footer />
     </Content>

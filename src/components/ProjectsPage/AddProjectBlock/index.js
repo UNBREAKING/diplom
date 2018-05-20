@@ -1,5 +1,6 @@
 import AddProjectBlock from './AddProjectBlock'
 import { connect } from 'react-redux'
+import { navigateToCreateProjectPage } from '../actions'
 
 const mapStateToProps = ({
   login: {
@@ -9,4 +10,4 @@ const mapStateToProps = ({
   user_token
 })
 
-export default connect(mapStateToProps)(AddProjectBlock)
+export default connect(mapStateToProps, { navigateToCreateProjectPage })(AddProjectBlock)
