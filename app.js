@@ -51,6 +51,24 @@ var User = new Schema({
 
 var UserModel = mongoose.model('User', User);
 
+var Project = new Schema({
+    name: String,
+    description: String,
+    git: String,
+    facebook: String,
+    tags: [{ type: Schema.Types.ObjectId, ref: 'Technology' }]
+})
+
+var ProjectModel = mongoose.model('Project', Project)
+
+var JobsToProject = new Schema({
+    projectId: { type: Schema.Types.ObjectId, ref: 'Project' },
+    jobId: { type: Schema.Types.ObjectId, ref: 'JobTitle' },
+    userId: { type: Schema.Types.ObjectId, ref: 'User' }
+})
+
+var JobsToProjectModel = mongoose.model('JobsToProject', JobsToProject)
+
 //Bind connection to error event (to get notification of connection errors)
 db.on('error', console.error.bind(console, 'MongoDB connection error:'))
 
