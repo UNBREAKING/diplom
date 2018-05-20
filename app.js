@@ -60,6 +60,7 @@ var Project = new Schema({
     description: String,
     git: String,
     facebook: String,
+    status: String,
     tags: [{ type: Schema.Types.ObjectId, ref: 'Technology' }]
 })
 
@@ -271,7 +272,8 @@ const createProject = function (req, res) {
         description: req.body.description,
         git: req.body.git,
         facebook:  req.body.facebook,
-        tags:  req.body.selectedTechnologies
+        tags:  req.body.selectedTechnologies,
+        status: 'Created'
     }
 
     var project = new ProjectModel(projectModel);
@@ -297,9 +299,30 @@ const createProject = function (req, res) {
    
 }
 
+const getProjects = function (req, res) {
+    ProjectModel.find().populate('tags').
+    exec(function(error, projects){
+
+        const jobsInProjects = projects.map(({ _id}) => 
+            JobsToProjectModel.find({ projectId: _id }).exec()
+        )
+
+        q.all(jobsInProjects).then((jobsInProjects) => {
+
+            const result = projects.map((project, index)=> ({ project, jobsLength: jobsInProjects[index].length }))
+
+            res.send(result)
+          });
+    });
+
+
+    
+}
+
 app.get('/getAdminPage', jsonParser, getAdminPage)
 app.get('/getRegistrationPage', jsonParser, getRegistrationPage)
 app.get('/getCreateProjectPage',jsonParser, getCreateProjectPage)
+app.get('/getProjects',jsonParser, getProjects)
 app.get('/*', landingPage)
 app.post('/api/addJobTitle', jsonParser, addJobTitle)
 app.post('/api/addCoreSkill', jsonParser, addCoreSkill)

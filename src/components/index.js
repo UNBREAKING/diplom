@@ -8,7 +8,7 @@ export { HomePage } from './HomePage'
 
 export { Footer } from './Footer'
 
-export { ProjectsPage } from './ProjectsPage'
+export {  default as ProjectsPage } from './ProjectsPage'
 
 export { ItemBlock } from './ItemBlock'
 
