@@ -3,14 +3,14 @@ import styled from 'styled-components'
 import { Head, BlueButton } from '../common'
 import CreateProjectForm from './CreateProjectForm'
 
-const CreateProjectPage = () => 
+const CreateProjectPage = ({ createProject }) => 
   <Wrapper>
     <Head name="Create Project" />
     <FormWrapper>
       <CreateProjectForm />
     </FormWrapper>
     <ButtonWrapper>
-      <BlueButton text="Save Project"/>
+      <BlueButton text="Save Project" onClick={createProject}/>
     </ButtonWrapper>
   </Wrapper>
 

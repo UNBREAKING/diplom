@@ -1,10 +1,13 @@
 var path = require('path');
 var express = require('express');
 var bodyParser = require("body-parser");
+var cookieParser = require('cookie-parser')
 var mongoose = require('mongoose');
 var q = require('q')
 
 var app = express();
+app.use(cookieParser())
+
 var jsonParser = bodyParser.json();
 //Set up default mongoose connection
 var mongoDB = 'mongodb://127.0.0.1/diplom';
@@ -52,6 +55,7 @@ var User = new Schema({
 var UserModel = mongoose.model('User', User);
 
 var Project = new Schema({
+    owner:  { type: Schema.Types.ObjectId, ref: 'User' },
     name: String,
     description: String,
     git: String,
@@ -251,6 +255,48 @@ const getCreateProjectPage = function (req, res) {
       });
 }
 
+const createProject = function (req, res) {
+
+    if (!req.body) return res.status(500).send({ error: 'Please fill all the data.' })
+    if (!req.body.name) return res.status(500).send({ error: "Please write the project's name." })
+    if (!req.body.description) return res.status(500).send({ error: "Please write the project's description." })
+    if (!req.body.git) return res.status(500).send({ error: "Please add git link." })
+    if (!req.body.facebook) return res.status(500).send({ error: "Please add facebook link." })
+    if (!req.body.selectedTechnologies) return res.status(500).send({ error: "Please add tags." })
+    if (!req.body.savedJobs) return res.status(500).send({ error: "Please add job titles to the project." })
+
+    const projectModel = {
+        owner: req.body.owner,
+        name: req.body.name,
+        description: req.body.description,
+        git: req.body.git,
+        facebook:  req.body.facebook,
+        tags:  req.body.selectedTechnologies
+    }
+
+    var project = new ProjectModel(projectModel);
+
+    project.save().then(() => {
+
+        ProjectModel.findOne(projectModel, function (err, project) {
+
+            const technologies = req.body.selectedTechnologies.map((elem) => ({
+                projectId: project._id,
+                jobId: elem,
+                userId: null
+             })            
+            )
+
+            JobsToProjectModel.insertMany(technologies, function(error, docs) {
+                if (error) return res.status(500).send({ error: "Something went wrong." })
+                res.send({ message: 'success'})
+            });
+        })
+
+    });
+   
+}
+
 app.get('/getAdminPage', jsonParser, getAdminPage)
 app.get('/getRegistrationPage', jsonParser, getRegistrationPage)
 app.get('/getCreateProjectPage',jsonParser, getCreateProjectPage)
@@ -262,7 +308,8 @@ app.post('/api/registration', jsonParser, registration)
 app.post('/api/login', jsonParser, login)
 app.post('/api/logout', jsonParser, logout)
 app.post('/api/forgotPassword', jsonParser, forgotPassword)
-app.post('/api/restPassword', jsonParser, resetPassword)
+app.post('/api/resetPassword', jsonParser, resetPassword)
+app.post('/api/createProject', jsonParser, createProject)
 app.delete('/api/deleteJobTitle', jsonParser, removeJobTitle)
 app.delete('/api/deleteCoreSkill', jsonParser, removeCoreSkill)
 app.delete('/api/deleteTechnology', jsonParser, removeTechnology)

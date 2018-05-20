@@ -1,10 +1,10 @@
 import { connect } from 'react-redux'
 import { compose, lifecycle } from 'recompose' 
 import CreateProjectPage from './CreateProjectPage'
-import { getCreateProjectPageData } from './actions'
+import { getCreateProjectPageData, createProject } from './actions'
 
 export default compose(
-  connect(null,{ getCreateProjectPageData }),
+  connect(null,{ getCreateProjectPageData, createProject }),
   lifecycle({
     componentDidMount(){
       const { getCreateProjectPageData } = this.props

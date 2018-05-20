@@ -100,7 +100,7 @@ export const resetPassword = () => (dispatch, getState) => {
   } = getState()
   
   fetch({ 
-    url: 'http://localhost:3000/api/restPassword', 
+    url: 'http://localhost:3000/api/resetPassword', 
     method: 'POST',
     body: JSON.stringify({...values, email: user_email })
   })

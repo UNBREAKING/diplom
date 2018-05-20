@@ -13,7 +13,7 @@ const mapStateToProps = ({
 
 export default compose(
   reduxForm({
-    form: 'creatProject'
+    form: 'createProject'
   }),
   connect(mapStateToProps)
 )(CreateProjectForm)
