@@ -1,11 +1,13 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import { Head, BlueButton } from '../common'
+import CreateProjectForm from './CreateProjectForm'
 
 const CreateProjectPage = () => 
   <Wrapper>
     <Head name="Create Project" />
     <FormWrapper>
+      <CreateProjectForm />
     </FormWrapper>
     <ButtonWrapper>
       <BlueButton text="Save Project"/>
