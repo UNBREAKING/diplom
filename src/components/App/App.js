@@ -6,7 +6,7 @@ import {
   Header,
   Footer,
   ProjectsPage,
-  OffersPage,
+  UsersPage,
   RegistrationPage,
   AdminPage
 } from '../index'
@@ -18,7 +18,7 @@ const App = () =>
       <Switch>
         <Route exact path='/' component={HomePage} />
         <Route exact path='/projects' component={ProjectsPage} />
-        <Route exact path='/offers' component={OffersPage} />
+        <Route exact path='/users' component={UsersPage} />
         <Route exact path='/registration' component={RegistrationPage} />
         <Route exact path='/admin-page' component={AdminPage} />
       </Switch>

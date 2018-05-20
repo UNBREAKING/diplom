@@ -1,13 +1,17 @@
 import React from 'react'
 import styled from 'styled-components'
-import { BlueButton, Title } from '../common'
+import { BlueButton, Title } from '../../common'
 
-const AddProjectBlock = () =>
+const AddProjectBlock = ({ user_token }) =>
   <Wrapper>
     <Title>
       Add Your Project
     </Title>
-    <BlueButton text="Create Project" />
+    { 
+      user_token ? 
+        <BlueButton text="Create Project" /> :
+        <BlueButton text="Sign In For Creating" />
+    }
     <Text>
       Turn your ideas into reality right here. Gather an excellent team for your project.
     </Text>

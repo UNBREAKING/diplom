@@ -1,14 +1,13 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import styled from 'styled-components'
 import { ItemBlock } from '../index'
-import AddProjectBlock from './AddProjectBlock'
-const ProjectsPage = () =>
+
+const UsersPage = () => 
   <Wrapper>
-    <AddProjectBlock />
-    <ItemBlock name="PROJECTS" />
+    <ItemBlock name="Users" />
   </Wrapper>
 
-export default ProjectsPage
+export default UsersPage
 
 const Wrapper = styled.div`
   max-width: 1280px;
