@@ -65,10 +65,10 @@ const landingPage = function (req, res) {
 
 const addJobTitle = function (req, res) {
 
-    if (!req.body && !req.body.name) return res.status(500).send({ error: 'Empty name for job title' })
+    if (!req.body && !req.body.name) return res.status(500).send({ error: 'Empty name for job title.' })
 
     JobTitleModel.findOne({ name: req.body.name }, function (err, resad) {
-        if (resad) return res.status(500).send({ error: 'You have already added this title' });
+        if (resad) return res.status(500).send({ error: 'You have already added this title.' });
 
         var jobTitle = new JobTitleModel(req.body);
         jobTitle.save().then(() => {
@@ -99,10 +99,10 @@ const addCoreSkill = function (req, res) {
 
 const addTechnology = function (req, res) {
 
-    if (!req.body && !req.body.name) return res.status(500).send({ error: 'Empty name for technology' })
+    if (!req.body && !req.body.name) return res.status(500).send({ error: 'Empty name for technology.' })
 
     TechnologyModel.findOne({ name: req.body.name }, function (err, resad) {
-        if (resad) return res.status(500).send({ error: 'You have already added this technology' });
+        if (resad) return res.status(500).send({ error: 'You have already added this technology.' });
 
         var technology = new TechnologyModel(req.body);
         technology.save().then(() => {
@@ -127,22 +127,22 @@ const getAdminPage = function (req, res) {
 
 const removeJobTitle = function (req, res) {
     JobTitleModel.findByIdAndRemove(req.body._id, function(err){
-        err ? res.status(500).send({ error: 'Something Wrong' }) :
-        res.send({ message: 'Job Title deleted successfull' })
+        err ? res.status(500).send({ error: 'Something Wrong.' }) :
+        res.send({ message: 'Job Title deleted successfull.' })
     })
 }
 
 const removeCoreSkill = function (req, res) {
     CoreSkillModel.findByIdAndRemove(req.body._id, function(err){
-        err ? res.status(500).send({ error: 'Something Wrong' }) :
-        res.send({ message: 'Core Skill deleted successfull' })
+        err ? res.status(500).send({ error: 'Something Wrong.' }) :
+        res.send({ message: 'Core Skill deleted successfull.' })
     })
 }
 
 const removeTechnology = function (req, res) {
     TechnologyModel.findByIdAndRemove(req.body._id, function(err){
-        err ? res.status(500).send({ error: 'Something Wrong' }) :
-        res.send({ message: 'Technology deleted successfull' })
+        err ? res.status(500).send({ error: 'Something Wrong.' }) :
+        res.send({ message: 'Technology deleted successfull.' })
     })
 }
 
@@ -158,14 +158,14 @@ const getRegistrationPage = function (req, res) {
 
 const registration = function (req, res) {
 
-    (!req.body.email && res.status(500).send({ error: 'Please add email' })) ||
-    (!req.body.password && res.status(500).send({ error: 'Please enter password'})) ||
-    (req.body.password !== req.body.secondPassword && res.status(500).send({ error: "Passwords doesn't match" })) ||
-    (!req.body.name && res.status(500).send({ error: "Please add your name" })) ||
-    (!req.body.surname && res.status(500).send({ error: "Please add your surname" }))
+    (!req.body.email && res.status(500).send({ error: 'Please add email.' })) ||
+    (!req.body.password && res.status(500).send({ error: 'Please enter password.'})) ||
+    (req.body.password !== req.body.secondPassword && res.status(500).send({ error: "Passwords doesn't match." })) ||
+    (!req.body.name && res.status(500).send({ error: "Please add your name." })) ||
+    (!req.body.surname && res.status(500).send({ error: "Please add your surname." }))
 
     UserModel.findOne({ email: req.body.email }, function (err, resad) {
-        if (resad) return res.status(500).send({ error: 'User with this email already exists' })
+        if (resad) return res.status(500).send({ error: 'User with this email already exists.' })
 
         var user = new UserModel({
             email: req.body.email,
@@ -193,10 +193,33 @@ const logout = function (req, res) {
 
 const login = function (req, res) {
     UserModel.findOne({ email: req.body.login }, function (err, user) {
-        if (!user) return res.status(500).send({ error: 'User login or password is wrong' })
-        if (user.password !== req.body.password) return res.status(500).send({ error: 'User login or password is wrong' })
+        if (!user) return res.status(500).send({ error: 'User login or password is wrong.' })
+        if (user.password !== req.body.password) return res.status(500).send({ error: 'User login or password is wrong.' })
 
         res.cookie('session_token', decodeURI(user._id)).send({ message: 'success'})
+    })
+}
+
+const forgotPassword = function (req, res) {
+    UserModel.findOne({ email: req.body.login }, function (err, user) {
+        if (!user) return res.status(500).send({ error: "Such user doesn't exist." })
+
+        res.send({ userEmail: user.email })
+    })
+}
+
+const resetPassword = function (req, res) {
+    UserModel.findOne({ email: req.body.email }, function (err, user) {
+        if (!user) return res.status(500).send({ error: "Such user doesn't exist." })
+        if (!req.body.password) return res.status(500).send({ error: "Password is empty." })
+        if (!req.body.confirmedPassword) return res.status(500).send({ error: "Please confirm password." })
+        if (req.body.password !== req.body.confirmedPassword ) return res.status(500).send({ error: "Passwords are not the same." })
+        
+        UserModel.findOneAndUpdate({ email: req.body.email }, {password: req.body.password }, function (err, user) {
+            if (err) return res.status(500).send({ error: 'Something went is wrong.' })
+
+            res.send({ message: "success"})
+        })
     })
 }
 
@@ -209,6 +232,8 @@ app.post('/api/addTechnology', jsonParser, addTechnology)
 app.post('/api/registration', jsonParser, registration)
 app.post('/api/login', jsonParser, login)
 app.post('/api/logout', jsonParser, logout)
+app.post('/api/forgotPassword', jsonParser, forgotPassword)
+app.post('/api/restPassword', jsonParser, resetPassword)
 app.delete('/api/deleteJobTitle', jsonParser, removeJobTitle)
 app.delete('/api/deleteCoreSkill', jsonParser, removeCoreSkill)
 app.delete('/api/deleteTechnology', jsonParser, removeTechnology)

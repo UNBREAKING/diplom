@@ -2,13 +2,13 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 import { BlueButton } from '../../common'
 
-const LoginButtons = ({ goToRegistration }) =>
+const LoginButtons = ({ goToRegistration, openModal }) =>
   <Wrapper>
     <Cell>
     <BlueButton onClick={ goToRegistration } text="Registration" />
     </Cell>
     <Cell right>
-    <BlueButton text="Forgot Password ?" />
+    <BlueButton text="Forgot Password ?" onClick={openModal}/>
     </Cell>
   </Wrapper>
 

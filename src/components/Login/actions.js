@@ -50,3 +50,69 @@ export const signin = () => (dispatch, getState) => {
   )
   .catch((err) => console.log(err))
 }
+
+export const openForgotPasswordModal = createAction('LOGIN/OPEN_FORGOT_PASSWORD_MODAL')
+export const closeForgotPasswordModal = createAction('LOGIN/CLOSE_FORGOT_PASSWORD_MODAL')
+
+export const saveUserLogin = createAction('LOGIN/SAVE_USER_LOGIN')
+export const cleanUserLogin = createAction('LOGIN/CLEAN_USER_LOGIN')
+
+export const openResetPasswordModal = createAction('LOGIN/OPEN_RESET_PASSWORD_MODAL')
+export const closeResetPasswordModal = createAction('LOGIN/CLOSE_RESET_PASSWORD_MODAL')
+
+export const checkLogin = () => (dispatch, getState) => {
+  const { 
+    form: {
+      forgotPassword: {
+        values = {}
+      } = {}
+    } = {}
+  } = getState()
+  
+  fetch({ 
+    url: 'http://localhost:3000/api/forgotPassword', 
+    method: 'POST',
+    body: JSON.stringify(values)
+  })
+  .then(({ error, userEmail }) => {
+    if(error) {
+      alert(error) 
+    } else {
+      dispatch(closeForgotPasswordModal())
+      dispatch(saveUserLogin(userEmail))
+      dispatch(openResetPasswordModal())
+    }
+    }
+  )
+  .catch((err) => console.log(err))
+}
+
+export const resetPassword = () => (dispatch, getState) => {
+  const {
+    login: {
+      user_email
+    },
+    form: {
+      resetPassword: {
+        values = {}
+      } = {}
+    } = {}
+  } = getState()
+  
+  fetch({ 
+    url: 'http://localhost:3000/api/restPassword', 
+    method: 'POST',
+    body: JSON.stringify({...values, email: user_email })
+  })
+  .then(({ error }) => {
+    if(error) {
+      alert(error) 
+    } else {
+      dispatch(closeResetPasswordModal())
+      dispatch(cleanUserLogin())
+      dispatch(openSignInModal())
+    }
+    }
+  )
+  .catch((err) => console.log(err))
+}
