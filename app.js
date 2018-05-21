@@ -337,7 +337,15 @@ const getProject = function (req, res) {
                 .populate('userId')
                 .exec(function(error, jobsAndUsers) {
                     if ( error ) return res.status(500).send({ error: "Something went wrong." })
-                    res.send({ info: project, jobsAndUsers })
+
+                    const offers = jobsAndUsers.map(({ _id }) => 
+                        OfferModel.find({ offerId: _id})
+                        .populate('userId').exec()
+                    )
+
+                    q.all(offers).then(offers => {
+                        res.send({ info: project, jobsAndUsers, offers })
+                    })
                 })
         })
 }

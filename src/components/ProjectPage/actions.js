@@ -104,3 +104,7 @@ export const sendOffer = offerId => (dispatch, getState) => {
   .catch((err) => console.log(err))
 
 }
+
+export const showOffer = createAction("PROJECT_PAGE/SHOW_OFFERS")
+
+export const hideOffer = createAction("PROJECT_PAGE/HIDE_OFFERS")

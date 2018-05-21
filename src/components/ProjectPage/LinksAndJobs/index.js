@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import { compose, withProps } from 'recompose' 
 import LinksAndJobs from './LinksAndJobs'
-import { sendOffer } from '../actions'
+import { sendOffer, showOffer } from '../actions'
 
 const mapStateToProps = ({
   login: {
@@ -10,6 +10,7 @@ const mapStateToProps = ({
   projectPage: {
     project: {
       jobsAndUsers = [],
+      offers = [],
       info: {
         git,
         facebook,
@@ -21,12 +22,13 @@ const mapStateToProps = ({
   git,
   facebook,
   jobsAndUsers,
+  offers,
   owner,
   user_token
 })
 
 export default compose(
-  connect(mapStateToProps, { sendOffer }),
+  connect(mapStateToProps, { sendOffer, showOffer }),
   withProps(({ jobsAndUsers }) =>({
     freeJobs: jobsAndUsers.filter(({userId}) => !userId)
   }))

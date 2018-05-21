@@ -11,7 +11,7 @@ import UserIcon from './UserIcon'
 `
 */
 
-const LinksAndJobs = ({ git, facebook, freeJobs, sendOffer, user_token, owner }) =>
+const LinksAndJobs = ({ git, facebook, freeJobs, sendOffer, user_token, owner, offers, showOffer }) =>
   <Wrapper>
     <Links>
       <Label>
@@ -51,10 +51,13 @@ const LinksAndJobs = ({ git, facebook, freeJobs, sendOffer, user_token, owner })
                 user_token &&
                   <Offers>
                     { 
-                      user_token !== owner &&
+                      user_token !== owner ?
                         <MakeOffer onClick={() => sendOffer(offerId)}>
                           ping for a job
-                        </MakeOffer>
+                        </MakeOffer> : 
+                          <MakeOffer onClick={() => offers[index].length && showOffer(index)}>
+                            {`${offers[index].length} ping${offers[index].length === 1 ? "": "s"}`}
+                          </MakeOffer>
                     }
                   </Offers>
               }

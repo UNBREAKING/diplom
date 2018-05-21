@@ -1,14 +1,19 @@
 import { handleActions } from 'redux-actions'
 import { 
   saveProjectInfo,
-  changeState
+  changeState,
+  showOffer,
+  hideOffer
  } from './actions'
 
 const initialState = {
-  project: []
+  project: [],
+  selectedOffer: null
 }
 
 const projectPage = handleActions({
+  [showOffer]: (state,{ payload }) => ({ ...state, selectedOffer: payload }),
+  [hideOffer]: state => ({ ...state, selectedOffer: null }),
   [saveProjectInfo]: (state, { payload }) => ({ ...state, project: payload }),
   [changeState]: (state, { payload }) => ({
     ...state, 
