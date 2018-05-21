@@ -108,3 +108,35 @@ export const sendOffer = offerId => (dispatch, getState) => {
 export const showOffer = createAction("PROJECT_PAGE/SHOW_OFFERS")
 
 export const hideOffer = createAction("PROJECT_PAGE/HIDE_OFFERS")
+
+export const selectUser = createAction("PROJECT_PAGE/SELECT_USER_ID")
+export const cleanUser = createAction("PROJECT_PAGE/CLEAN_USER_ID")
+
+export const updateData = createAction("PROJECT_PAGE/UPDATE_DATA")
+
+export const chooseUserForJob = () => (dispatch, getState) => {
+  const {
+    projectPage: {
+      selectedOffer,
+      project: { jobsAndUsers },
+      selectedUserForOffer
+    }
+  } = getState()
+
+  Number.isInteger(selectedOffer) && selectedUserForOffer ?
+  fetch({ 
+    url: `http://localhost:3000/api/chooseUserForJob`, 
+    method: 'POST',
+    body: JSON.stringify({ offerId: jobsAndUsers[selectedOffer]._id, userId: selectedUserForOffer})
+  }).then((data) => {
+    if(data.error) {
+      alert(data.error)
+    } else {
+      dispatch(updateData(data))
+      dispatch(hideOffer())
+    }
+  })
+  .catch((err) => console.log(err)) :
+  alert('Plase choose user')
+
+}

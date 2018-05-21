@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import HeaderInfo from './HeaderInfo'
 import DescriptionAndMembers from './DescriptionAndMembers'
 import LinksAndJobs from './LinksAndJobs'
+import OffersModal from './OffersModal'
 
 const ProjectPage = ({ match }) =>
   <Wrapper>
@@ -11,6 +12,7 @@ const ProjectPage = ({ match }) =>
       <DescriptionAndMembers />
       <LinksAndJobs />
     </Content>
+    <OffersModal />
   </Wrapper>
 
 export default ProjectPage

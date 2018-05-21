@@ -340,7 +340,8 @@ const getProject = function (req, res) {
 
                     const offers = jobsAndUsers.map(({ _id }) => 
                         OfferModel.find({ offerId: _id})
-                        .populate('userId').exec()
+                        .populate({ path:'userId', populate: { path:'skill' } })
+                        .exec()
                     )
 
                     q.all(offers).then(offers => {
@@ -392,6 +393,22 @@ const sendOffer = function(req,res){
     })
 }
 
+const chooseUserForJob = function(req, res) {
+    JobsToProjectModel.findByIdAndUpdate(req.body.offerId,{ userId: req.body.userId },{ new: true })
+    .populate('userId')
+    .populate('jobId')
+    .exec(function(error, ref){
+        if ( error ) return res.status(500).send({ error: "Something went wrong." })
+        
+        OfferModel.remove({ offerId: ref._id }, function(err, result){
+            if ( err ) return result.status(500).send({ error: "Something went wrong." })
+
+            res.send(ref)
+        })
+
+    })
+}
+
 
 app.get('/getAdminPage', jsonParser, getAdminPage)
 app.get('/getRegistrationPage', jsonParser, getRegistrationPage)
@@ -412,6 +429,7 @@ app.post('/api/startProject', jsonParser, startProject)
 app.post('/api/pauseProject', jsonParser, pauseProject)
 app.post('/api/closeProject', jsonParser, closeProject)
 app.post('/api/sendOffer', jsonParser, sendOffer)
+app.post('/api/chooseUserForJob', jsonParser, chooseUserForJob)
 app.delete('/api/deleteJobTitle', jsonParser, removeJobTitle)
 app.delete('/api/deleteCoreSkill', jsonParser, removeCoreSkill)
 app.delete('/api/deleteTechnology', jsonParser, removeTechnology)

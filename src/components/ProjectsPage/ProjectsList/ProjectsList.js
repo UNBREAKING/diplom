@@ -4,7 +4,7 @@ import Project from '../Project'
 
 const ProjectsList = ({ projects }) =>
   <Wrapper>
-    { projects.map(project => <Project item={project}/>) }
+    { projects.map((project, index) => <Project key={index} item={project}/>) }
   </Wrapper>
 
 export default ProjectsList
