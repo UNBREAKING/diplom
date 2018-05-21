@@ -320,7 +320,7 @@ const getProjects = function (req, res) {
     });   
 }
 
-const getProject = function (req, res){
+const getProject = function (req, res) {
     ProjectModel.findOne({ _id: req.params.id })
         .populate('tags')
         .exec(function(error, project) {
@@ -334,6 +334,28 @@ const getProject = function (req, res){
                 })
         })
 }
+
+const startProject = function (req, res) {
+    ProjectModel.findOneAndUpdate({_id: req.body.id},{ status: "In Progress" },function(error, project) {
+        if ( error ) return res.status(500).send({ error: "Something went wrong." })
+        res.send({ status: "In Progress" })
+    })
+}
+
+const pauseProject = function (req, res) {
+    ProjectModel.findOneAndUpdate({_id: req.body.id},{ status: "On Pause" },function(error, project) {
+        if ( error ) return res.status(500).send({ error: "Something went wrong." })
+        res.send({ status: "On Pause" })
+    })
+}
+
+const closeProject = function (req, res) {
+    ProjectModel.findOneAndUpdate({_id: req.body.id},{ status: "Closed" },function(error, project) {
+        if ( error ) return res.status(500).send({ error: "Something went wrong." })
+        res.send({ status: "Closed" })
+    })
+}
+
 
 app.get('/getAdminPage', jsonParser, getAdminPage)
 app.get('/getRegistrationPage', jsonParser, getRegistrationPage)
@@ -350,6 +372,9 @@ app.post('/api/logout', jsonParser, logout)
 app.post('/api/forgotPassword', jsonParser, forgotPassword)
 app.post('/api/resetPassword', jsonParser, resetPassword)
 app.post('/api/createProject', jsonParser, createProject)
+app.post('/api/startProject', jsonParser, startProject)
+app.post('/api/pauseProject', jsonParser, pauseProject)
+app.post('/api/closeProject', jsonParser, closeProject)
 app.delete('/api/deleteJobTitle', jsonParser, removeJobTitle)
 app.delete('/api/deleteCoreSkill', jsonParser, removeCoreSkill)
 app.delete('/api/deleteTechnology', jsonParser, removeTechnology)

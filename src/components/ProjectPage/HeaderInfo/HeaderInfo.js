@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components'
 import { BlueButton } from '../../common'
 import ProjectIcon from './ProjectIcon'
 
-const HeaderInfo = ({ name, tags = [], status }) =>
+const HeaderInfo = ({ name, tags = [], status, startProject, closeProject, pauseProject, user_token, owner }) =>
   <Wrapper>
     <ImageContent>
       <ProjectIcon/>
@@ -31,21 +31,34 @@ const HeaderInfo = ({ name, tags = [], status }) =>
       <Status status={status}>
         { status }
       </Status>
-      {
+      
+      { 
+        user_token === owner &&
         status === 'Created' &&
-          <BlueButton text="Start" />
-      }
-      {
-        status === 'Continue' && 
-          <BlueButton text="On Pause" />
-      }
-      {
-        status === 'On Pause' &&
-          <BlueButton text="Continue" />
+          <ButtonWrapper>
+            <BlueButton text="Start" onClick={startProject} />
+          </ButtonWrapper>
       }
       { 
+        user_token === owner &&
+        status === 'In Progress' &&
+          <ButtonWrapper>
+            <BlueButton text="On Pause" onClick={pauseProject}/>
+          </ButtonWrapper>
+      }
+      { 
+        user_token === owner &&
+        status === 'On Pause' &&
+          <ButtonWrapper>
+            <BlueButton text="Continue" onClick={startProject} />
+          </ButtonWrapper>
+      }
+      { 
+        user_token === owner &&
         status !== 'Created' &&
-          <BlueButton text="Close" />
+          <ButtonWrapper>
+            <BlueButton text="Close" onClick={closeProject}/>
+          </ButtonWrapper>
       }
     </RightContent>
   </Wrapper>
@@ -103,7 +116,6 @@ const RightContent = styled.div`
 
 const Status = styled.div`
   font-family: 'Roboto Regular';
-  margin-bottom: 10px;
   text-align: center;
   ${props => (props.status === 'Created' || props.status === 'In Progress') && css`
     color: #00E608;
@@ -114,4 +126,9 @@ const Status = styled.div`
   ${props => props.status === 'On Pause' && css`
     color: #E6C500;
   `}
+`
+
+const ButtonWrapper = styled.div`
+  margin-top: 10px;
+  text-align: center;
 `

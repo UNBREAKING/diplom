@@ -1,6 +1,7 @@
 import { handleActions } from 'redux-actions'
 import { 
-  saveProjectInfo
+  saveProjectInfo,
+  changeState
  } from './actions'
 
 const initialState = {
@@ -9,6 +10,16 @@ const initialState = {
 
 const projectPage = handleActions({
   [saveProjectInfo]: (state, { payload }) => ({ ...state, project: payload }),
+  [changeState]: (state, { payload }) => ({
+    ...state, 
+    project: { 
+      ...state.project, 
+      info: { 
+        ...state.project.info, 
+        status: payload 
+      } 
+    } 
+  })
 }, initialState)
 
 export default projectPage

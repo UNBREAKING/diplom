@@ -42,8 +42,8 @@ const LinksAndJobs = ({ git, facebook, freeJobs }) =>
       </Label>
       <JobsContent>
         {
-          freeJobs.map(({ jobId: {  name } }) =>
-            <Job >
+          freeJobs.map(({ jobId: { _id, name }}, index) =>
+            <Job key={`${_id}_${index}`}>
               <Name>
                 {name}
               </Name>
