@@ -7,6 +7,7 @@ import adminPage from '../components/AdminPage/reducer'
 import registrationPage from '../components/RegistrationPage/reducer'
 import createProjectPage from '../components/CreateProjectPage/reducer'
 import projectsPage from '../components/ProjectsPage/reducer'
+import projectPage from '../components/ProjectPage/reducer'
 
 const reducers = combineReducers({
   login,
@@ -14,6 +15,7 @@ const reducers = combineReducers({
   registrationPage,
   createProjectPage,
   projectsPage,
+  projectPage,
   form: reduxFormReducer,
   router: routerReducer
 })

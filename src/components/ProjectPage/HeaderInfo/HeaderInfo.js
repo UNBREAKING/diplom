@@ -1,58 +1,62 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
-import ProjectIcon from './ProjectIcon'
 import { BlueButton } from '../../common'
+import ProjectIcon from './ProjectIcon'
 
-const Project = ({ item: { project: { name, tags, status, _id }, jobsLength, teamLength }, navigateToProjectPage }) =>
- <Wrapper>
-    <ImageBlock>
-      <ProjectIcon />
-    </ImageBlock>
+const HeaderInfo = ({ name, tags = [], status }) =>
+  <Wrapper>
+    <ImageContent>
+      <ProjectIcon/>
+    </ImageContent>
     <Content>
-      <Name> {name }</Name>
-      <Team>
-        <Label>
-          Team:
-        </Label>
-        {`${teamLength} / ${jobsLength} memebers`}
-      </Team>
+      <Name>
+        {name}
+      </Name>
       <Tags>
         <Label>
           Tags:
-        </Label>
+          </Label>
         <TagsWrapper>
-          { 
-            tags.map(({ name, color, _id }) => 
+          {
+            tags.map(({ name, color, _id }) =>
               <Tag key={_id} color={color}>
                 { name }
               </Tag>
-            ) 
+            )
           }
         </TagsWrapper>
       </Tags>
     </Content>
     <RightContent>
-      <BlueButton text="View Information" onClick={()=>navigateToProjectPage(_id)}/>
-      <Status>
-        <Label>
-          Status:
-        </Label>
+      <Status status={status}>
         { status }
       </Status>
+      {
+        status === 'Created' &&
+          <BlueButton text="Start" />
+      }
+      {
+        status === 'Continue' && 
+          <BlueButton text="On Pause" />
+      }
+      {
+        status === 'On Pause' &&
+          <BlueButton text="Continue" />
+      }
+      { 
+        status !== 'Created' &&
+          <BlueButton text="Close" />
+      }
     </RightContent>
- </Wrapper>
+  </Wrapper>
 
-
-export default Project
+export default HeaderInfo
 
 const Wrapper = styled.div`
-  padding: 20px 20px;
-  margin-top: 20px;
-  box-shadow: 0 0 1px black;
-  background: white;
+  padding-top: 20px;
 `
 
-const ImageBlock = styled.div`
+const ImageContent = styled.span`
   background: #F7F7F7;
   display: inline-block;
 `
@@ -66,13 +70,8 @@ const Content = styled.div`
 const Name = styled.div`
   font-family: 'Roboto Regular';
   color: #003F61;
-  font-size: 18px;
+  font-size: 24px;
   font-weight: 700;
-`
-
-const Team = styled.div`
-  font-family: 'Roboto Regular';
-  margin-top: 5px;
 `
 
 const Label = styled.span`
@@ -104,5 +103,15 @@ const RightContent = styled.div`
 
 const Status = styled.div`
   font-family: 'Roboto Regular';
-  margin-top: 10px;
+  margin-bottom: 10px;
+  text-align: center;
+  ${props => (props.status === 'Created' || props.status === 'In Progress') && css`
+    color: #00E608;
+  `}
+  ${props => props.status === 'Closed' && css`
+    color: #E6001C;
+  `}
+  ${props => props.status === 'On Pause' && css`
+    color: #E6C500;
+  `}
 `

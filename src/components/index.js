@@ -23,3 +23,5 @@ export { FieldsContainer } from './FieldsContainer'
 export { default as AdminPage } from './AdminPage'
 
 export { default as CreateProjectPage } from './CreateProjectPage'
+
+export { default as ProjectPage } from './ProjectPage'

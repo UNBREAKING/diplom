@@ -15,3 +15,5 @@ export const getData = () => dispatch =>
     dispatch(saveProjects(data))
   })
   .catch((err) => console.log(err))
+
+export const navigateToProjectPage = (id) => dispatch => dispatch(push(`/project/${id}`))

@@ -317,16 +317,27 @@ const getProjects = function (req, res) {
 
             res.send(result)
           });
-    });
+    });   
+}
 
-
-    
+const getProject = function (req, res){
+    ProjectModel.findOne({ _id: req.params.id })
+        .populate('tags')
+        .exec(function(error, project) {
+            JobsToProjectModel.find({ projectId: project._id })
+                .populate('jobId')
+                .populate('userId')
+                .exec(function(error, jobsAndUsers) {
+                    res.send({ info: project, jobsAndUsers })
+                })
+        })
 }
 
 app.get('/getAdminPage', jsonParser, getAdminPage)
 app.get('/getRegistrationPage', jsonParser, getRegistrationPage)
 app.get('/getCreateProjectPage',jsonParser, getCreateProjectPage)
 app.get('/getProjects',jsonParser, getProjects)
+app.get('/getProject/:id',jsonParser, getProject)
 app.get('/*', landingPage)
 app.post('/api/addJobTitle', jsonParser, addJobTitle)
 app.post('/api/addCoreSkill', jsonParser, addCoreSkill)

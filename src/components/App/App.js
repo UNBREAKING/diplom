@@ -9,7 +9,8 @@ import {
   UsersPage,
   RegistrationPage,
   AdminPage,
-  CreateProjectPage
+  CreateProjectPage,
+  ProjectPage
 } from '../index'
 
 const App = () =>
@@ -23,6 +24,7 @@ const App = () =>
         <Route exact path='/registration' component={RegistrationPage} />
         <Route exact path='/admin-page' component={AdminPage} />
         <Route exact path='/create-project' component={CreateProjectPage} />
+        <Route path='/project/:id' component={ProjectPage} />
       </Switch>
       <Footer />
     </Content>
