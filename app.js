@@ -74,6 +74,13 @@ var JobsToProject = new Schema({
 
 var JobsToProjectModel = mongoose.model('JobsToProject', JobsToProject)
 
+var Offer = new Schema({
+    userId: { type: Schema.Types.ObjectId, ref: 'User' },
+    offerId: { type: Schema.Types.ObjectId, ref: 'JobsToProject' }
+})
+
+var OfferModel = mongoose.model('Offer', Offer)
+
 //Bind connection to error event (to get notification of connection errors)
 db.on('error', console.error.bind(console, 'MongoDB connection error:'))
 
@@ -356,6 +363,27 @@ const closeProject = function (req, res) {
     })
 }
 
+const sendOffer = function(req,res){
+    const Offer = {
+        offerId: req.body.offerId,
+        userId: req.body.userId
+    }
+
+    OfferModel.find(Offer, function (err, resad) {
+        if ( err ) return res.status(500).send({ error: "Something went wrong." })
+        if ( resad.length > 0 ) return res.status(500).send({ error: "You have already sent request." })
+        var offer = new OfferModel(Offer);
+        offer.save().then(() => {
+            OfferModel.findOne(Offer, function (err, resad) {
+                if ( err ) return res.status(500).send({ error: "Something went wrong." })
+            
+                res.send({ message: "Success" })
+            })
+
+        })
+    })
+}
+
 
 app.get('/getAdminPage', jsonParser, getAdminPage)
 app.get('/getRegistrationPage', jsonParser, getRegistrationPage)
@@ -375,6 +403,7 @@ app.post('/api/createProject', jsonParser, createProject)
 app.post('/api/startProject', jsonParser, startProject)
 app.post('/api/pauseProject', jsonParser, pauseProject)
 app.post('/api/closeProject', jsonParser, closeProject)
+app.post('/api/sendOffer', jsonParser, sendOffer)
 app.delete('/api/deleteJobTitle', jsonParser, removeJobTitle)
 app.delete('/api/deleteCoreSkill', jsonParser, removeCoreSkill)
 app.delete('/api/deleteTechnology', jsonParser, removeTechnology)

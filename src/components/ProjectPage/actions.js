@@ -4,7 +4,7 @@ import { createAction } from 'redux-actions'
 
 export const saveProjectInfo = createAction('PROJECT_PAGE/SAVE_PROJECT_INFORMATION')
 
-export const getData = (id) => dispatch =>
+export const getData = id => dispatch =>
   fetch({ 
     url: `http://localhost:3000/getProject/${id}`, 
     method: 'GET'
@@ -83,4 +83,24 @@ export const closeProject = () => (dispatch, getState) => {
         dispatch(changeState(status))
   )
   .catch((err) => console.log(err))
+}
+
+export const sendOffer = offerId => (dispatch, getState) => {
+  const {
+    login: {
+      user_token
+    }
+  } = getState()
+
+  fetch({ 
+    url: `http://localhost:3000/api/sendOffer`, 
+    method: 'POST',
+    body: JSON.stringify({ offerId, userId: user_token})
+  }).then(({ error }) => 
+      error ? 
+        alert(error) :
+        alert('Offer sent successfull')
+  )
+  .catch((err) => console.log(err))
+
 }

@@ -11,7 +11,7 @@ import UserIcon from './UserIcon'
 `
 */
 
-const LinksAndJobs = ({ git, facebook, freeJobs }) =>
+const LinksAndJobs = ({ git, facebook, freeJobs, sendOffer, user_token, owner }) =>
   <Wrapper>
     <Links>
       <Label>
@@ -42,11 +42,22 @@ const LinksAndJobs = ({ git, facebook, freeJobs }) =>
       </Label>
       <JobsContent>
         {
-          freeJobs.map(({ jobId: { _id, name }}, index) =>
-            <Job key={`${_id}_${index}`}>
+          freeJobs.map(({ _id: offerId , jobId: { _id, name }}, index) =>
+            <Job key={`${offerId}_${_id}_${index}`}>
               <Name>
                 {name}
               </Name>
+              {
+                user_token &&
+                  <Offers>
+                    { 
+                      user_token !== owner &&
+                        <MakeOffer onClick={() => sendOffer(offerId)}>
+                          ping for a job
+                        </MakeOffer>
+                    }
+                  </Offers>
+              }
             </Job>  
           )
         }
@@ -118,4 +129,15 @@ const Link = styled.div`
 const NavigationLink = styled.a`
   margin-left: 10px;
   color: #003F61;
+`
+
+const Offers = styled.div`
+  float: right;
+  font-size: 14px;
+  font-family: 'Roboto Regular';
+  color: #003F61;
+  text-decoration: underline;
+  cursor: pointer;
+`
+const MakeOffer = styled.div`
 `
