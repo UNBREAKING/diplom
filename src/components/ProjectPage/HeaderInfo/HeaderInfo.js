@@ -15,7 +15,7 @@ const HeaderInfo = ({ name, tags = [], status }) =>
       <Tags>
         <Label>
           Tags:
-          </Label>
+        </Label>
         <TagsWrapper>
           {
             tags.map(({ name, color, _id }) =>

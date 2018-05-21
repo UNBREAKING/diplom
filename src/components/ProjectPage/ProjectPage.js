@@ -1,10 +1,14 @@
 import React from 'react'
 import styled from 'styled-components'
 import HeaderInfo from './HeaderInfo'
+import DescriptionAndMembers from './DescriptionAndMembers'
 
 const ProjectPage = ({ match }) =>
   <Wrapper>
-    <HeaderInfo/>
+    <Content>
+      <HeaderInfo />
+      <DescriptionAndMembers />
+    </Content>
   </Wrapper>
 
 export default ProjectPage
@@ -13,5 +17,8 @@ const Wrapper = styled.div`
   max-width: 1280px;
   margin: 20px auto;
   padding: 0 20px;
+`
+const Content = styled.div`
   box-shadow: 0 0 1px black;
+  padding: 0 20px 20px;
 `
