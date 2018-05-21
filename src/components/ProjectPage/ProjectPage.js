@@ -2,12 +2,14 @@ import React from 'react'
 import styled from 'styled-components'
 import HeaderInfo from './HeaderInfo'
 import DescriptionAndMembers from './DescriptionAndMembers'
+import LinksAndJobs from './LinksAndJobs'
 
 const ProjectPage = ({ match }) =>
   <Wrapper>
     <Content>
       <HeaderInfo />
       <DescriptionAndMembers />
+      <LinksAndJobs />
     </Content>
   </Wrapper>
 

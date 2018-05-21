@@ -324,10 +324,12 @@ const getProject = function (req, res){
     ProjectModel.findOne({ _id: req.params.id })
         .populate('tags')
         .exec(function(error, project) {
+            if ( error ) return res.status(500).send({ error: "Something went wrong." })
             JobsToProjectModel.find({ projectId: project._id })
                 .populate('jobId')
                 .populate('userId')
                 .exec(function(error, jobsAndUsers) {
+                    if ( error ) return res.status(500).send({ error: "Something went wrong." })
                     res.send({ info: project, jobsAndUsers })
                 })
         })

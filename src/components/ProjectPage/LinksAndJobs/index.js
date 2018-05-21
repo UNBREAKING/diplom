@@ -1,25 +1,26 @@
 import { connect } from 'react-redux'
 import { compose, withProps } from 'recompose' 
-import DescriptionAndMembers from './DescriptionAndMembers'
+import LinksAndJobs from './LinksAndJobs'
 
 const mapStateToProps = ({
   projectPage: {
     project: {
       jobsAndUsers = [],
       info: {
-        description
+        git,
+        facebook
       } = {}
     } = {}
   } = {}
 }) => ({
-  description,
+  git,
+  facebook,
   jobsAndUsers
 })
 
 export default compose(
   connect(mapStateToProps),
   withProps(({ jobsAndUsers }) =>({
-    membersLabel: `Members: ${jobsAndUsers.filter(({userId})=> userId).length} / ${jobsAndUsers.length} active`,
-    members: jobsAndUsers.filter(({userId}) => userId)
+    freeJobs: jobsAndUsers.filter(({userId}) => !userId)
   }))
-)(DescriptionAndMembers)
+)(LinksAndJobs)

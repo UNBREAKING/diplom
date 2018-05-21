@@ -16,12 +16,6 @@ const DescriptionAndMembers = ({ description, membersLabel, members }) =>
         {membersLabel}
       </Label>
       <MembersContent>
-        { 
-          !members.length &&
-            <NoMembers>
-              Find free positions under.
-            </NoMembers> 
-        }
       </MembersContent>
     </Members>
   </Wrapper>
@@ -65,11 +59,4 @@ const MembersContent = styled.div`
   overflow-y: scroll;
   width: 100%;
   height: 400px;
-`
-
-const NoMembers = styled.div`
-  text-align: center;
-  font-family: 'Roboto Regular';
-  font-size: 16px;
-  color: #003F61;
 `
