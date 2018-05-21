@@ -282,14 +282,14 @@ const createProject = function (req, res) {
 
         ProjectModel.findOne(projectModel, function (err, project) {
 
-            const technologies = req.body.selectedTechnologies.map((elem) => ({
+            const jobs = req.body.savedJobs.map((elem) => ({
                 projectId: project._id,
                 jobId: elem,
                 userId: null
              })            
             )
 
-            JobsToProjectModel.insertMany(technologies, function(error, docs) {
+            JobsToProjectModel.insertMany(jobs, function(error, docs) {
                 if (error) return res.status(500).send({ error: "Something went wrong." })
                 res.send({ message: 'success'})
             });
@@ -309,7 +309,11 @@ const getProjects = function (req, res) {
 
         q.all(jobsInProjects).then((jobsInProjects) => {
 
-            const result = projects.map((project, index)=> ({ project, jobsLength: jobsInProjects[index].length }))
+            const result = projects.map((project, index)=> ({ 
+                project, 
+                jobsLength: jobsInProjects[index].length,
+                teamLength: jobsInProjects[index].filter(({userId})=> userId).length
+            }))
 
             res.send(result)
           });

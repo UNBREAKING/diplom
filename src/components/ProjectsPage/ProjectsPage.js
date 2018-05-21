@@ -2,10 +2,14 @@ import React from 'react'
 import styled from 'styled-components'
 import { ItemBlock } from '../index'
 import AddProjectBlock from './AddProjectBlock'
+import ProjectsList from './ProjectsList'
+
 const ProjectsPage = () =>
   <Wrapper>
     <AddProjectBlock />
-    <ItemBlock name="PROJECTS" />
+    <ItemBlock name="PROJECTS">
+      <ProjectsList />
+    </ItemBlock>
   </Wrapper>
 
 export default ProjectsPage

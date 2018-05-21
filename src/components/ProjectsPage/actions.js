@@ -1,7 +1,10 @@
 import { push } from 'react-router-redux'
 import fetch from '../../services/fetch'
+import { createAction } from 'redux-actions'
 
 export const navigateToCreateProjectPage = () => dispatch => dispatch(push('/create-project'))
+
+export const saveProjects = createAction('PROJECTS_PAGE/SAVE_PROJECTS')
 
 export const getData = () => dispatch =>
   fetch({ 
@@ -9,8 +12,6 @@ export const getData = () => dispatch =>
     method: 'GET'
   })
   .then((data) => {
-    console.log(data)
-    //dispatch(saveJobs(jobs))
-    //dispatch(saveTechnologies(technologies))
+    dispatch(saveProjects(data))
   })
   .catch((err) => console.log(err))

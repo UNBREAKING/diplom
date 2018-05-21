@@ -2,11 +2,12 @@ import React from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 
-const ItemBlock = ({ name }) =>
+const ItemBlock = ({ name, children }) =>
   <Wrapper>
     <Title>
       { name }
     </Title>
+    { children }
   </Wrapper>
 
 ItemBlock.propTypes = {
