@@ -684,12 +684,15 @@ A)
 17) Forgot Password: 
 
 ![Forgot Password](mockups/images/17_Forgot_Password.png)
+
 18) ResetPassword
 
 ![Reset Password](mockups/images/18_Reset_Password.png)
+
 19) Administration Page
 
 ![Administration Page](mockups/images/19_Administration_Page.png)
+
 20) Invites
 
 ![Invites](mockups/images/20_Invites.png)
