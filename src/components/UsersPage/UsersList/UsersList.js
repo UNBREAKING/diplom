@@ -76,5 +76,5 @@ const Skill = styled.span`
 `
 
 const IconWrapper = styled.div`
-  margin: auto;
+  text-align: center;
 `
