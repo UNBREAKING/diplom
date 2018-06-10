@@ -409,6 +409,25 @@ const chooseUserForJob = function(req, res) {
     })
 }
 
+const getUsers = function(req, res) {
+    const userProjects = ProjectModel.find({ owner: req.body.userId }).exec()
+    const users = UserModel.find().populate('skill')
+
+    q.all([userProjects, users]).then(([userProjects, users]) => {
+      
+        const usersInProject = users.map(({ _id}) => 
+            JobsToProjectModel.find({ userId: _id }).exec()
+        )
+
+        q.all(usersInProject).then( usersInProject => {
+            const usersInfo = users.map((userInfo, index) => ({ userInfo, usersProjects: usersInProject[index].length }))
+            
+            const result = { userProjects, usersInfo }
+            res.send(result)
+        })
+    });
+}
+
 
 app.get('/getAdminPage', jsonParser, getAdminPage)
 app.get('/getRegistrationPage', jsonParser, getRegistrationPage)
@@ -416,6 +435,7 @@ app.get('/getCreateProjectPage',jsonParser, getCreateProjectPage)
 app.get('/getProjects',jsonParser, getProjects)
 app.get('/getProject/:id',jsonParser, getProject)
 app.get('/*', landingPage)
+app.post('/api/getUsersPage',jsonParser, getUsers)
 app.post('/api/addJobTitle', jsonParser, addJobTitle)
 app.post('/api/addCoreSkill', jsonParser, addCoreSkill)
 app.post('/api/addTechnology', jsonParser, addTechnology)

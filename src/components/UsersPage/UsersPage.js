@@ -1,10 +1,13 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import { ItemBlock } from '../index'
+import UsersList from './UsersList'
 
 const UsersPage = () => 
   <Wrapper>
-    <ItemBlock name="Users" />
+    <ItemBlock name="Users">
+      <UsersList />
+    </ItemBlock>
   </Wrapper>
 
 export default UsersPage

@@ -14,7 +14,7 @@ export { ItemBlock } from './ItemBlock'
 
 export { default as Login } from './Login'
 
-export { UsersPage } from './UsersPage'
+export { default as UsersPage } from './UsersPage'
 
 export { default as RegistrationPage } from './RegistrationPage'
 
